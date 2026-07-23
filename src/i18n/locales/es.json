@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "workflow": "Flujo SDD",
+    "contact": "Contacto",
+    "download_cv": "Descargar CV"
+  },
+  "hero": {
+    "badge": "Disponibilidad Inmediata",
+    "title": "Sistemas de gestión y plataformas de comercio web.",
+    "subtitle": "Transformo procesos complejos en soluciones digitales intuitivas que mejoran la experiencia del usuario y optimizan la operación de tu negocio.",
+    "badges": {
+      "dev": "Desarrollador de Software",
+      "bilingual": "Bilingüe (ES/EN)",
+      "sdd": "Desarrollo Guiado por Especificaciones"
+    },
+    "cta_projects": "Ver Proyectos",
+    "cta_contact": "Contáctame"
+  },
+  "sdd": {
+    "badge": "METODOLOGÍA DE INGENIERÍA",
+    "title": "Desarrollo Guiado por Especificaciones (SDD)",
+    "description": "Diseño software definiendo especificaciones rigurosas, estructuras de datos y criterios de aceptación antes de codificar, aprovechando OpenCode y modelos de IA para lograr máxima precisión."
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Aplicaciones web reales y demostraciones técnicas funcionales.",
+    "status_in_dev": "Especificación de Arquitectura y En Desarrollo",
+    "live_demo": "Ver Demo",
+    "source_code": "Repositorio GitHub",
+    "case_study": "Ver Especificación"
+  },
+  "contact": {
+    "title": "Trabajemos Juntos",
+    "subtitle": "¿Tienes un proyecto en mente o buscas contratar a un desarrollador? Envíame un mensaje.",
+    "name_label": "Tu Nombre",
+    "email_label": "Tu Correo",
+    "message_label": "Mensaje",
+    "send_btn": "Enviar Mensaje",
+    "success_msg": "¡Mensaje enviado con éxito!"
+  }
+}

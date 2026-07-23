@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#09090b] text-[#f4f4f5] antialiased overflow-x-hidden;
+    font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-[#a3e635]/20 text-[#f4f4f5];
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#09090b];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#27272a] rounded-full;
+  }
+}

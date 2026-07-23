@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "workflow": "SDD Workflow",
+    "contact": "Contact",
+    "download_cv": "Download CV"
+  },
+  "hero": {
+    "badge": "Immediate Availability",
+    "title": "Management systems and e-commerce platforms.",
+    "subtitle": "I transform complex processes into intuitive digital solutions that enhance the user experience and optimize your business operations.",
+    "badges": {
+      "dev": "Software Developer",
+      "bilingual": "Bilingual (ES/EN)",
+      "sdd": "Spec-Driven Development"
+    },
+    "cta_projects": "View Projects",
+    "cta_contact": "Get in Touch"
+  },
+  "sdd": {
+    "badge": "ENGINEERING METHODOLOGY",
+    "title": "Spec-Driven Development (SDD)",
+    "description": "I engineer software by defining rigorous specifications, data structures, and acceptance criteria before writing code, leveraging OpenCode and AI models for precision."
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Real-world web applications and functional technical demos.",
+    "status_in_dev": "Architecture Spec & In Development",
+    "live_demo": "Live Demo",
+    "source_code": "GitHub Repo",
+    "case_study": "View Spec"
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Have a project in mind or looking to hire? Send me a message.",
+    "name_label": "Your Name",
+    "email_label": "Your Email",
+    "message_label": "Message",
+    "send_btn": "Send Message",
+    "success_msg": "Message sent successfully!"
+  }
+}
