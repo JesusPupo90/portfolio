@@ -8,12 +8,14 @@
   },
   "hero": {
     "badge": "Disponibilidad Inmediata",
+    "role": "Desarrollador de Software",
     "title": "Sistemas de gestión y plataformas de comercio web.",
     "subtitle": "Transformo procesos complejos en soluciones digitales intuitivas que mejoran la experiencia del usuario y optimizan la operación de tu negocio.",
+    "location": "Barranquilla, Colombia",
     "badges": {
       "dev": "Desarrollador de Software",
       "bilingual": "Bilingüe (ES/EN)",
-      "sdd": "Desarrollo Guiado por Especificaciones"
+      "sdd": "Flujo SDD"
     },
     "cta_projects": "Ver Proyectos",
     "cta_contact": "Contáctame"

@@ -42,23 +42,9 @@ export default function Navbar() {
                   {t(`nav.${link.key}`)}
                 </a>
               ))}
+              {/* Language Toggle */}
+              <LanguageToggle />
             </div>
-
-            {/* Availability Badge */}
-            {/* <div className="flex items-center gap-2 px-3 py-1.5
-              bg-brand-accent/10 border border-brand-accent/20 rounded-full">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full
-                  rounded-full bg-brand-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent" />
-              </span>
-              <span className="text-xs font-medium text-brand-accent">
-                {t('hero.badge')}
-              </span>
-            </div> */}
-
-            {/* Language Toggle */}
-            <LanguageToggle />
 
             {/* Download CV */}
             <a
@@ -72,15 +58,18 @@ export default function Navbar() {
               {t('nav.download_cv')}
             </a>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-text-muted hover:text-text-light transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          
+          {/* Mobile Right Section */}
+          <div className="md:hidden flex items-center gap-1">
+            <LanguageToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-text-muted hover:text-text-light transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -104,20 +93,8 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* <div className="flex items-center gap-2 px-3 py-2
-            bg-brand-accent/10 border border-brand-accent/20 rounded-lg">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full
-                rounded-full bg-brand-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent" />
-            </span>
-            <span className="text-xs font-medium text-brand-accent">
-              {t('hero.badge')}
-            </span>
-          </div> */}
-
           <div className="flex items-center gap-3 pt-2">
-            <LanguageToggle />
+            
             <a
               href="/docs/CV_Jesus_Pupo_Software_Developer.pdf"
               download

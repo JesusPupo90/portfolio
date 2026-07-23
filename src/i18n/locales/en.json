@@ -8,12 +8,14 @@
   },
   "hero": {
     "badge": "Immediate Availability",
+    "role": "Software Developer",
     "title": "Management systems and e-commerce platforms.",
     "subtitle": "I transform complex processes into intuitive digital solutions that enhance the user experience and optimize your business operations.",
+    "location": "Barranquilla, Colombia",
     "badges": {
       "dev": "Software Developer",
       "bilingual": "Bilingual (ES/EN)",
-      "sdd": "Spec-Driven Development"
+      "sdd": "SDD Workflow"
     },
     "cta_projects": "View Projects",
     "cta_contact": "Get in Touch"

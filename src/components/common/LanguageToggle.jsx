@@ -12,7 +12,7 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium
+      className="flex items-center gap-1 px-2 py-1.5 text-sm font-medium
         text-text-muted hover:text-text-light transition-colors
         border border-surface-border rounded-lg
         hover:border-brand-accent/50"
