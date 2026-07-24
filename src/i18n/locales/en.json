@@ -28,14 +28,15 @@
   "projects": {
     "title": "Featured Projects",
     "subtitle": "Real-world web applications and functional technical demos.",
+    "featured_label": "Featured Project",
     "items": {
       "casamartha": {
         "title": "Casa Martha Recovery",
-        "description": "High-conversion landing page for hospitality and recovery accommodations. UI architecture optimized for lead generation in the health sector."
+        "description": "High-conversion landing page for lodging and recovery. UI architecture optimized for lead generation in the lodging industry."
       },
       "slice": {
         "title": "Slice Pizzeria",
-        "description": "E-commerce order management web application demo. Dynamic interface for product selection and shopping cart state management."
+        "description": "Demo of a web application for e-commerce order management. Dynamic interface for product selection, shopping cart, and checkout."
       },
       "aura": {
         "title": "AURA APPAREL",

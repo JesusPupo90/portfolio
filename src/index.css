@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-[#09090b] text-[#f4f4f5] antialiased overflow-x-hidden;
     font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;

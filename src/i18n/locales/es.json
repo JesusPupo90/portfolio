@@ -28,14 +28,15 @@
   "projects": {
     "title": "Proyectos Destacados",
     "subtitle": "Aplicaciones web reales y demostraciones técnicas funcionales.",
+    "featured_label": "Proyecto Destacado",
     "items": {
       "casamartha": {
         "title": "Casa Martha Recovery",
-        "description": "Landing page de alta conversión para hospedaje y recuperación. Arquitectura de UI optimizada para captación de leads en el sector salud."
+        "description": "Landing page de alta conversión para hospedaje y recuperación. Arquitectura de UI optimizada para captación de leads en el sector hospedaje."
       },
       "slice": {
         "title": "Slice Pizzeria",
-        "description": "Demostración de aplicación web para gestión de pedidos de e-commerce. Interfaz dinámica para selección de productos y carrito de compras."
+        "description": "Demostración de aplicación web para gestión de pedidos de e-commerce. Interfaz dinámica para selección de productos y carrito de compras y checkout."
       },
       "aura": {
         "title": "AURA APPAREL",

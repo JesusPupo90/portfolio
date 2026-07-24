@@ -1,9 +1,8 @@
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExternalLink, Plus } from 'lucide-react'
 import { IoLogoGithub } from 'react-icons/io5'
 
-// Recomendación: Coloca las imágenes en la carpeta public (ej: /projects/casamartha.webp) 
-// para que Vite las sirva de forma directa y limpia sin errores de ruta.
 const PROJECT_IMAGES = {
   casamartha: '/projects/casa-martha-recovery.webp',
   slice: '/projects/slice-pizzeria.webp',
@@ -11,9 +10,43 @@ const PROJECT_IMAGES = {
 }
 
 const PROJECT_TAGS = {
-  casamartha: ['React', 'Tailwind CSS', 'Vite'],
-  slice: ['React', 'Context API', 'CSS Modules'],
-  aura: ['React', 'i18next', 'Zustand'],
+  casamartha: ['React', 'Tailwind CSS', 'Vite', 'Mapbox SDK', 'React Router', 'Payments'],
+  slice: ['React', 'Tailwind CSS', 'Vite', 'i18next', 'Context API'],
+  aura: ['React', 'Tailwind CSS', 'Vite', 'i18next', 'Context API'],
+}
+
+const PROJECT_LINKS = {
+  casamartha: {
+    demo: 'https://casa-martha-recovery.vercel.app',
+    github: 'https://github.com/JesusPupo90/casa-martha',
+  },
+  slice: {
+    demo: 'https://slice-pizzeria-virid.vercel.app/',
+    github: 'https://github.com/JesusPupo90/slice-pizzeria',
+  },
+  aura: {
+    demo: 'https://aura-apparel-store-three.vercel.app/',
+    github: 'https://github.com/JesusPupo90/aura-apparel-store',
+  },
+}
+
+function FadeImage({ src, alt, className }) {
+  const [loaded, setLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true)
+  }, [])
+
+  return (
+    <img
+      ref={imgRef}
+      src={src}
+      alt={alt}
+      onLoad={() => setLoaded(true)}
+      className={`${className} transition-all duration-700 ${loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+    />
+  )
 }
 
 function ProjectCard({ projectKey, featured }) {
@@ -22,6 +55,7 @@ function ProjectCard({ projectKey, featured }) {
   const description = t(`projects.items.${projectKey}.description`)
   const tags = PROJECT_TAGS[projectKey]
   const image = PROJECT_IMAGES[projectKey]
+  const links = PROJECT_LINKS[projectKey]
 
   if (featured) {
     return (
@@ -29,25 +63,35 @@ function ProjectCard({ projectKey, featured }) {
         <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
         <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden transition-all duration-500 hover:border-surface-border flex flex-col md:flex-row">
           
-          {/* Contenedor de la Imagen: Altura fija en móvil para que respire */}
-          <div className="relative w-full md:w-3/5 h-64 md:h-auto overflow-hidden">
-            <img
+          {/* Contenedor de la Imagen */}
+          <div className="relative w-full md:w-3/5 h-64 md:h-auto overflow-hidden bg-surface-dark">
+            <FadeImage
               src={image}
               alt={title}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
-            {/* Gradiente sutil solo para fundir con el borde */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-60 md:hidden" />
           </div>
 
-          {/* Contenedor de Texto: Bloque independiente abajo en móvil, al lado en desktop */}
+          {/* Contenedor de Texto */}
           <div className="relative z-20 flex flex-col justify-center p-6 md:p-8 md:w-2/5 bg-surface-card/40 md:bg-transparent">
-            <h3 className="text-2xl md:text-3xl font-sans font-extrabold text-text-light tracking-tight">
-              {title}
-            </h3>
+            
+            {/* Título unificado con el Badge de Featured */}
+              {featured && (
+                <span className="w-fit px-2 py-0.5 mb-6 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-widest bg-brand-accent/10 border border-brand-accent/25 rounded-sm">
+                  {t('projects.featured_label')}
+                </span>
+              )}
+            <div className="flex flex-col md:flex-row md:items-center gap-3">
+              <h3 className="text-2xl md:text-3xl font-sans font-extrabold text-text-light tracking-tight">
+                {title}
+              </h3>
+            </div>
+
             <p className="text-text-muted font-light mt-2 text-sm md:text-base">
               {description}
             </p>
+
             <div className="flex flex-wrap gap-2 mt-4">
               {tags.map((tag) => (
                 <span
@@ -59,14 +103,24 @@ function ProjectCard({ projectKey, featured }) {
               ))}
             </div>
             
-            {/* Enlaces de acción directos en el flujo del texto */}
+            {/* Enlaces de acción */}
             <div className="flex items-center gap-4 mt-6">
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors cursor-pointer">
+              <a 
+                href={links.demo} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors"
+              >
                 <ExternalLink size={14} /> {t("projects.live_demo", "Demo")}
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors cursor-pointer">
+              </a>
+              <a 
+                href={links.github} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors"
+              >
                 <IoLogoGithub size={14} /> {t("projects.source_code", "Código")}
-              </span>
+              </a>
             </div>
           </div>
 
@@ -81,8 +135,8 @@ function ProjectCard({ projectKey, featured }) {
       <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
       <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden transition-all duration-500 hover:border-surface-border flex flex-col justify-between">
         <div>
-          <div className="relative w-full aspect-[4/3] overflow-hidden">
-            <img
+          <div className="relative w-full aspect-[4/3] overflow-hidden bg-surface-dark">
+            <FadeImage
               src={image}
               alt={title}
               className="w-full h-full object-cover object-[25%_center] group-hover:scale-105 transition-transform duration-700 [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
@@ -109,14 +163,23 @@ function ProjectCard({ projectKey, featured }) {
           </div>
         </div>
 
-        {/* Enlaces de acción idénticos a los del featured pero abajo del todo */}
         <div className="px-5 pb-5 pt-2 flex items-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors cursor-pointer">
+          <a 
+            href={links.demo} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors"
+          >
             <ExternalLink size={14} /> {t("projects.live_demo", "Demo")}
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors cursor-pointer">
+          </a>
+          <a 
+            href={links.github} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors"
+          >
             <IoLogoGithub size={14} /> {t("projects.source_code", "Código")}
-          </span>
+          </a>
         </div>
 
       </div>
@@ -129,7 +192,7 @@ export default function Projects() {
   const { t } = useTranslation()
 
   return (
-    <section id="projects" className="relative px-4 py-24 bg-[#09090b] overflow-hidden">
+    <section id="projects" className="relative px-4 py-24 bg-[#09090b] overflow-hidden scroll-mt-16">
       <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-brand-accent/[0.03] rounded-full blur-[120px] pointer-events-none" />
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="relative mb-16">
