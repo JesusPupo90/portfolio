@@ -1,5 +1,6 @@
 import Navbar from './components/common/Navbar'
 import Hero from './components/sections/Hero'
+import Projects from './components/sections/Projects'
 
 function App() {
   return (
@@ -7,9 +8,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <section id="projects" className="h-screen flex items-center justify-center border-t border-surface-border">
-          <p className="text-text-muted text-lg">Projects Section</p>
-        </section>
+        <Projects />
         <section id="workflow" className="h-screen flex items-center justify-center border-t border-surface-border">
           <p className="text-text-muted text-lg">SDD Workflow Section</p>
         </section>

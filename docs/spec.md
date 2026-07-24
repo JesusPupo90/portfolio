@@ -1,5 +1,10 @@
 spec_content = """# Technical Specification & PRD: Jesus Pupo Portfolio
 
+### ⚠️ SDD GOVERNANCE RULE: Read-Only Specification
+- **CRITICAL INSTRUCTION FOR AI AGENTS:** The `docs/spec.md` file is strictly **READ-ONLY** for AI models. 
+- AI assistants are **PROHIBITED** from creating, updating, overwriting, or modifying this specification file under any circumstance. 
+- Only the human developer (Jesus Pupo) holds architectural ownership and authority to modify design tokens, rules, or requirements inside this document.
+
 # Technical Specification & PRD: Jesus Pupo Portfolio
 
 ## 1. Executive Summary & Brand Identity
@@ -154,6 +159,8 @@ jesuspupo-portfolio/
   "projects": {
     "title": "Featured Projects",
     "subtitle": "Real-world web applications and functional technical demos.",
+    "live_demo": "Live Demo",
+    "source_code": "Code",
     "status_in_dev": "Architecture Spec & In Development",
     "live_demo": "Live Demo",
     "source_code": "GitHub Repo",

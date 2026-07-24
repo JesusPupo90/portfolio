@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, ChevronDown, MapPin, Plus } from 'lucide-react'
+import profile from "../../assets/hero-portrait.webp"
 
 const BADGES = [
   { id: 'dev', labelKey: 'hero.badges.dev' },
@@ -14,7 +15,7 @@ export default function Hero() {
     <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 py-12 lg:py-20 overflow-hidden bg-[#09090b]">
       
       {/* Luz ambiental técnica súper sutil */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
@@ -85,14 +86,14 @@ export default function Hero() {
           
           <div className="relative group w-full max-w-md">
             {/* Brillo de fondo */}
-            <div className="absolute -inset-0.5 bg-gradient-to-b from-brand-accent/5 to-transparent rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
+            <div className="absolute -inset-0.5 bg-gradient-to-b from-brand-accent/10 to-transparent rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
 
             <div className="relative bg-[#09090b] border border-surface-border/50 p-2 rounded-xl backdrop-blur-sm">
               
               {/* Contenedor Fotográfico */}
               <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden bg-surface-dark border border-surface-border/50">
                 <img
-                  src="src\assets\hero-portrait.webp" 
+                  src={profile} 
                   alt="Jesus Pupo"
                   className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-90 group-hover:grayscale-0 transition-all duration-700 [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
                 />

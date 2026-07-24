@@ -28,9 +28,23 @@
   "projects": {
     "title": "Featured Projects",
     "subtitle": "Real-world web applications and functional technical demos.",
+    "items": {
+      "casamartha": {
+        "title": "Casa Martha Recovery",
+        "description": "High-conversion landing page for hospitality and recovery accommodations. UI architecture optimized for lead generation in the health sector."
+      },
+      "slice": {
+        "title": "Slice Pizzeria",
+        "description": "E-commerce order management web application demo. Dynamic interface for product selection and shopping cart state management."
+      },
+      "aura": {
+        "title": "AURA APPAREL",
+        "description": "Minimalist luxury apparel catalog. Bilingual support (ES/EN), global state management, and dynamic currency switching ($USD / $COP)."
+      }
+    },
     "status_in_dev": "Architecture Spec & In Development",
     "live_demo": "Live Demo",
-    "source_code": "GitHub Repo",
+    "source_code": "Code",
     "case_study": "View Spec"
   },
   "contact": {
