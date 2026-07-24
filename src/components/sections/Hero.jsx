@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 py-12 lg:py-20 overflow-hidden bg-[#09090b]">
       
-      {/* Luz ambiental técnica */}
+      {/* Luz ambiental técnica súper sutil */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -21,24 +21,24 @@ export default function Hero() {
         {/* Columna Izquierda: Copy Editorial */}
         <div className="lg:col-span-7 flex flex-col items-start text-left relative">
           
-          {/* Micro-guía de arquitectura (Arriba Izquierda) */}
+          {/* Micro-guía de arquitectura */}
           <Plus size={16} className="absolute -top-10 -left-6 text-surface-border/50 hidden lg:block" />
 
-          {/* Badge Estado - Tipografía Técnica Mono */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 bg-brand-accent/5 border border-brand-accent/20 rounded-none">
+          {/* Badge Estado - Neutralizado */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 bg-surface-card/30 border border-surface-border/50 rounded-none">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent" />
             </span>
-            <span className="text-[10px] sm:text-xs font-mono font-medium text-brand-accent tracking-widest uppercase">
+            <span className="text-[10px] sm:text-xs font-sans font-semibold text-text-light tracking-widest uppercase">
               {t('hero.badge')}
             </span>
           </div>
 
           {/* H1 Gigante (Display) */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-light leading-[1.1] mb-6 tracking-tighter">
-            <span className="block text-brand-accent text-lg sm:text-xl font-mono font-medium mb-3 tracking-normal uppercase">
-              Jesus Pupo <span className="text-surface-border mx-2">/</span> {t('hero.role')}
+            <span className="block text-text-muted text-sm sm:text-base font-sans font-semibold mb-4 tracking-widest uppercase">
+              Jesus Pupo <span className="text-surface-border font-light mx-2">/</span> {t('hero.role')}
             </span>
             {t('hero.title')}
           </h1>
@@ -47,12 +47,12 @@ export default function Hero() {
             {t('hero.subtitle')}
           </p>
 
-          {/* Badges de Stack - Tipografía Técnica */}
+          {/* Badges de Stack */}
           <div className="flex flex-wrap items-center gap-3 mb-12">
             {BADGES.map((badge) => (
               <span
                 key={badge.id}
-                className="px-3 py-1.5 text-xs font-mono text-text-muted bg-surface-card/30 border border-surface-border rounded-sm hover:border-brand-accent/30 hover:text-text-light transition-colors"
+                className="px-3 py-1.5 text-xs font-mono text-text-muted bg-surface-card/30 border border-surface-border rounded-sm hover:border-text-light transition-colors"
               >
                 {t(badge.labelKey)}
               </span>
@@ -63,40 +63,36 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
             <a
               href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold bg-brand-accent text-[#09090b] rounded-sm hover:bg-brand-accent/90 transition-all shadow-[0_0_20px_rgba(var(--brand-accent),0.2)] hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold bg-brand-accent text-[#09090b] rounded-sm hover:bg-brand-accent/90 transition-all shadow-[0_0_20px_rgba(var(--brand-accent),0.15)] hover:scale-[1.02]"
             >
               {t('hero.cta_projects')}
               <ArrowRight size={18} />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-mono font-medium text-text-light border border-surface-border bg-transparent rounded-sm hover:border-text-muted hover:bg-surface-card transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-sans font-medium text-text-light border border-surface-border bg-transparent rounded-sm hover:border-text-muted hover:bg-surface-card transition-all"
             >
               {t('hero.cta_contact')}
             </a>
           </div>
 
-          {/* Micro-guía (Abajo Izquierda) */}
+          {/* Micro-guía */}
           <Plus size={16} className="absolute -bottom-10 -left-6 text-surface-border/50 hidden lg:block" />
         </div>
 
-        {/* Columna Derecha: Tarjeta Fotográfica (Bento Glass) */}
+        {/* Columna Derecha: Tarjeta Fotográfica */}
         <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
           
           <div className="relative group w-full max-w-md">
-            {/* Brillo de fondo estelar */}
-            <div className="absolute -inset-0.5 bg-gradient-to-b from-brand-accent/10 to-transparent rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
+            {/* Brillo de fondo */}
+            <div className="absolute -inset-0.5 bg-gradient-to-b from-brand-accent/5 to-transparent rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
 
             <div className="relative bg-[#09090b] border border-surface-border/50 p-2 rounded-xl backdrop-blur-sm">
               
-              {/* Contenedor Fotográfico con Máscara de Fusión */}
+              {/* Contenedor Fotográfico */}
               <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden bg-surface-dark border border-surface-border/50">
-                {/* 
-                  Aquí la imagen usa [mask-image:...] para difuminarse hacia abajo, 
-                  creando la sensación de fusión con el entorno que vimos en tus referencias.
-                */}
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                  src="src\assets\hero-portrait.webp" 
                   alt="Jesus Pupo"
                   className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-90 group-hover:grayscale-0 transition-all duration-700 [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
                 />
@@ -104,7 +100,7 @@ export default function Hero() {
                 <div className="absolute inset-0 border border-white/5 rounded-lg pointer-events-none" />
               </div>
 
-              {/* Metadatos - Footer Técnico */}
+              {/* Metadatos */}
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
                 <div>
                   <h3 className="text-sm font-bold text-text-light font-sans tracking-tight">Jesus Pupo</h3>
@@ -120,7 +116,7 @@ export default function Hero() {
             </div>
           </div>
           
-          {/* Micro-guía (Arriba Derecha) */}
+          {/* Micro-guía */}
           <Plus size={16} className="absolute -top-10 -right-6 text-surface-border/50 hidden lg:block" />
         </div>
 
