@@ -23,7 +23,25 @@
   "sdd": {
     "badge": "ENGINEERING METHODOLOGY",
     "title": "Spec-Driven Development (SDD)",
-    "description": "I engineer software by defining rigorous specifications, data structures, and acceptance criteria before writing code, leveraging OpenCode and AI models for precision."
+    "subtitle": "I design software by defining rigorous specifications, data structures, and acceptance criteria before coding, leveraging OpenCode and AI models to achieve maximum accuracy.",
+    "steps": {
+      "spec": {
+        "title": "1. I Write the Spec",
+        "description": "I Define data structures, components, routes, and acceptance criteria in a structured markdown spec before writing any code."
+      },
+      "ai": {
+        "title": "2. AI Implementation",
+        "description": "OpenCode + DeepSeek interpret the spec and generate production-ready code with precise type safety and linting."
+      },
+      "refine": {
+        "title": "3. Review & Refine",
+        "description": "I Iterate with AI-assisted refactors, ensuring every line aligns with the original spec and architectural vision."
+      },
+      "deploy": {
+        "title": "4. Deploy & Document",
+        "description": "I Ship with confidence knowing the spec serves as living documentation for future maintenance and scalability."
+      }
+    }
   },
   "projects": {
     "title": "Featured Projects",

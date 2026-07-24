@@ -23,7 +23,25 @@
   "sdd": {
     "badge": "METODOLOGÍA DE INGENIERÍA",
     "title": "Desarrollo Guiado por Especificaciones (SDD)",
-    "description": "Diseño software definiendo especificaciones rigurosas, estructuras de datos y criterios de aceptación antes de codificar, aprovechando OpenCode y modelos de IA para lograr máxima precisión."
+    "subtitle": "Diseño software definiendo especificaciones rigurosas, estructuras de datos y criterios de aceptación antes de codificar, aprovechando OpenCode y modelos de IA para lograr máxima precisión.",
+    "steps": {
+      "spec": {
+        "title": "1. Escribo la Especificación",
+        "description": "Defino estructuras de datos, componentes, rutas y criterios de aceptación en un spec markdown estructurado antes de escribir código."
+      },
+      "ai": {
+        "title": "2. Implementación con IA",
+        "description": "OpenCode + DeepSeek interpretan el spec y generan código listo para producción con tipado preciso y linting."
+      },
+      "refine": {
+        "title": "3. Reviso y Refino",
+        "description": "Itero con refactores asistidos por IA, asegurando que cada línea se alinee con el spec original y la visión arquitectónica."
+      },
+      "deploy": {
+        "title": "4. Despliego y Documento",
+        "description": "Despliego con confianza sabiendo que el spec sirve como documentación viva para mantenimiento y escalabilidad futura."
+      }
+    }
   },
   "projects": {
     "title": "Proyectos Destacados",
