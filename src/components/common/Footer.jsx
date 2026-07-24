@@ -1,0 +1,137 @@
+import { useTranslation } from 'react-i18next'
+import { Github, Linkedin, Plus } from 'lucide-react'
+
+const navigationLinks = [
+  { key: 'about', href: '#about' },
+  { key: 'projects', href: '#projects' },
+  { key: 'contact', href: '#contact' },
+]
+
+function GithubIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  )
+}
+
+function LinkedinIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  )
+}
+
+function TiktokIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+    </svg>
+  )
+}
+
+const socialLinks = [
+  { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/JesusPupo90' },
+  { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/jesus-pupo-lafaurie' },
+  { icon: TiktokIcon, label: 'TikTok', href: 'https://www.tiktok.com/@wanna.dev' },
+]
+
+export default function Footer() {
+  const { t } = useTranslation()
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer className="relative bg-[#09090b] border-t border-surface-border/40">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+        
+        {/* Elemento estético de esquina tipo consola */}
+        <Plus size={14} className="absolute -top-12 -left-4 text-surface-border/50 hidden md:block" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          
+          {/* Columna de Marca Personal */}
+          <div className="space-y-6">
+            <a href="#" className="font-mono text-xl tracking-wide text-text-main hover:text-brand-accent transition-colors">
+              jesus<span className="text-brand-accent">pupo</span>.dev
+            </a>
+            <p className="text-text-muted text-sm leading-relaxed font-mono">
+              // {t('hero.subtitle', 'Self-taught software developer building robust web applications.')}
+            </p>
+            <div className="flex items-center gap-4">
+              {socialLinks.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-sm bg-surface-card/40 border border-surface-border/60 hover:border-brand-accent/50 text-text-muted hover:text-brand-accent flex items-center justify-center transition-colors duration-200"
+                  aria-label={label}
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Columna de Navegación */}
+          <div className="space-y-6">
+            <h3 className="font-mono text-xs uppercase tracking-wider text-text-main font-semibold">
+              {t('footer.navigation', 'Navegación')}
+            </h3>
+            <ul className="space-y-3 font-mono text-sm">
+              {navigationLinks.map((link) => (
+                <li key={link.key}>
+                  <a
+                    href={link.href}
+                    className="text-text-muted hover:text-brand-accent transition-colors duration-200"
+                  >
+                    {t(`navbar.${link.key}`, link.key)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Columna de Contacto Directo */}
+          <div className="space-y-6">
+            <h3 className="font-mono text-xs uppercase tracking-wider text-text-main font-semibold">
+              {t('footer.contact', 'Contacto')}
+            </h3>
+            <ul className="space-y-3 font-mono text-sm">
+              <li>
+                <a 
+                  href="mailto:hello@jesuspupo.dev" 
+                  className="text-text-muted hover:text-brand-accent transition-colors duration-200"
+                >
+                  hello@jesuspupo.dev
+                </a>
+              </li>
+              <li className="text-text-muted text-xs">
+                Barranquilla, Colombia (Remote / Global)
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Franja Inferior de Copyright y Atribución */}
+      <div className="border-t border-surface-border/40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 font-poppins text-xs">
+          <p className="text-text-muted">
+            © {currentYear} Jesus Pupo. {t('footer.rights', 'Todos los derechos reservados.')}
+          </p>
+          <p className="text-text-muted">
+            {t('footer.developedBy', 'Desarrollado por')}{' '}
+            <span className="text-brand-accent font-semibold font-poppins">Jesus Pupo</span> •{' '}
+            <span className="text-brand-light font-bold font-poppins">WannaDev Studios</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

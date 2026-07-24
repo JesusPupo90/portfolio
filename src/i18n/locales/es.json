@@ -72,7 +72,18 @@
     "name_label": "Tu Nombre",
     "email_label": "Tu Correo",
     "message_label": "Mensaje",
+    "name_placeholder": "Juan Pérez",
+    "email_placeholder": "juan@ejemplo.com",
+    "message_placeholder": "Cuéntame sobre tu proyecto...",
     "send_btn": "Enviar Mensaje",
-    "success_msg": "¡Mensaje enviado con éxito!"
+    "sending_btn": "Enviando...",
+    "success_msg": "¡Mensaje enviado con éxito!",
+    "error_required": "Este campo es obligatorio",
+    "error_email": "Ingresa un correo válido",
+    "error_message_min": "El mensaje debe tener al menos 10 caracteres",
+    "error_submit": "Algo salió mal. Intenta de nuevo.",
+    "whatsapp_title": "¿Prefieres mensajería instantánea?",
+    "whatsapp_description": "Contáctame directamente por WhatsApp para una respuesta más rápida.",
+    "whatsapp_btn": "Chatear en WhatsApp"
   }
 }
