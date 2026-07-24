@@ -1,3 +1,7 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Menu, X, Download, ExternalLink } from 'lucide-react'
@@ -9,6 +13,10 @@ const NAV_LINKS = [
   { key: 'contact', href: '#contact' },
 ]
 
+/* ==========================================================================
+   NAVBAR COMPONENT
+   ========================================================================== */
+
 export default function Navbar() {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
@@ -17,7 +25,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 backdrop-blur-sm bg-[#09090b]/80 border-b border-[#27272a]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand */}
+          {/* --- Brand --- */}
           <a href="#" className="flex flex-col leading-tight">
             <span className="text-lg font-bold text-text-light tracking-tight">
               Jesus Pupo
@@ -27,9 +35,8 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop Navigation */}
+          {/* --- Desktop Navigation --- */}
           <div className="hidden md:flex items-center gap-6">
-            {/* Nav Links */}
             <div className="flex items-center gap-1">
               {NAV_LINKS.map((link) => (
                 <a
@@ -42,11 +49,9 @@ export default function Navbar() {
                   {t(`nav.${link.key}`)}
                 </a>
               ))}
-              {/* Language Toggle */}
               <LanguageToggle />
             </div>
 
-            {/* Download CV */}
             <a
               href="/docs/CV_Jesus_Pupo_Software_Developer.pdf"
               download
@@ -58,8 +63,8 @@ export default function Navbar() {
               {t('nav.download_cv')}
             </a>
           </div>
-          
-          {/* Mobile Right Section */}
+
+          {/* --- Mobile Right Section --- */}
           <div className="md:hidden flex items-center gap-1">
             <LanguageToggle />
             <button
@@ -73,7 +78,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* --- Mobile Menu --- */}
       <div
         className={`md:hidden border-t border-[#27272a] overflow-hidden transition-all duration-300 ${
           isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
@@ -94,7 +99,6 @@ export default function Navbar() {
           ))}
 
           <div className="flex items-center gap-3 pt-2">
-            
             <a
               href="/docs/CV_Jesus_Pupo_Software_Developer.pdf"
               download

@@ -1,3 +1,7 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Plus } from 'lucide-react'
 
@@ -40,6 +44,10 @@ const socialLinks = [
   { icon: TiktokIcon, label: 'TikTok', href: 'https://www.tiktok.com/@wanna.dev' },
 ]
 
+/* ==========================================================================
+   FOOTER COMPONENT
+   ========================================================================== */
+
 export default function Footer() {
   const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
@@ -47,13 +55,12 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#09090b] border-t border-surface-border/40">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
-        
-        {/* Elemento estético de esquina tipo consola */}
+
         <Plus size={14} className="absolute -top-12 -left-4 text-surface-border/50 hidden md:block" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          
-          {/* Columna de Marca Personal */}
+
+          {/* --- Brand Column --- */}
           <div className="space-y-6">
             <a href="#" className="font-mono text-xl tracking-wide text-text-main hover:text-brand-accent transition-colors">
               jesus<span className="text-brand-accent">pupo</span>.dev
@@ -77,7 +84,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Columna de Navegación */}
+          {/* --- Navigation Column --- */}
           <div className="space-y-6">
             <h3 className="font-mono text-xs uppercase tracking-wider text-text-main font-semibold">
               {t('footer.navigation', 'Navegación')}
@@ -96,15 +103,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Columna de Contacto Directo */}
+          {/* --- Contact Column --- */}
           <div className="space-y-6">
             <h3 className="font-mono text-xs uppercase tracking-wider text-text-main font-semibold">
               {t('footer.contact', 'Contacto')}
             </h3>
             <ul className="space-y-3 font-mono text-sm">
               <li>
-                <a 
-                  href="mailto:hello@jesuspupo.dev" 
+                <a
+                  href="mailto:hello@jesuspupo.dev"
                   className="text-text-muted hover:text-brand-accent transition-colors duration-200"
                 >
                   hello@jesuspupo.dev
@@ -119,15 +126,15 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Franja Inferior de Copyright y Atribución */}
+      {/* --- Copyright Bar --- */}
       <div className="border-t border-surface-border/40">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 font-poppins text-xs">
           <p className="text-text-muted">
-            © {currentYear} Jesus Pupo. {t('footer.rights', 'Todos los derechos reservados.')}
+            &copy; {currentYear} Jesus Pupo. {t('footer.rights', 'Todos los derechos reservados.')}
           </p>
           <p className="text-text-muted">
             {t('footer.developedBy', 'Desarrollado por')}{' '}
-            <span className="text-brand-accent font-semibold font-poppins">Jesus Pupo</span> •{' '}
+            <span className="text-brand-accent font-semibold font-poppins">Jesus Pupo</span> &bull;{' '}
             <span className="text-brand-light font-bold font-poppins">WannaDev Studios</span>
           </p>
         </div>

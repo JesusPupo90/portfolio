@@ -1,3 +1,7 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExternalLink, Plus } from 'lucide-react'
@@ -30,6 +34,10 @@ const PROJECT_LINKS = {
   },
 }
 
+/* ==========================================================================
+   FADE IMAGE COMPONENT
+   ========================================================================== */
+
 function FadeImage({ src, alt, className }) {
   const [loaded, setLoaded] = useState(false)
   const imgRef = useRef(null)
@@ -49,6 +57,10 @@ function FadeImage({ src, alt, className }) {
   )
 }
 
+/* ==========================================================================
+   PROJECT CARD COMPONENT
+   ========================================================================== */
+
 function ProjectCard({ projectKey, featured }) {
   const { t } = useTranslation()
   const title = t(`projects.items.${projectKey}.title`)
@@ -62,8 +74,8 @@ function ProjectCard({ projectKey, featured }) {
       <div className="md:col-span-2 group relative">
         <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
         <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden transition-all duration-500 hover:border-surface-border flex flex-col md:flex-row">
-          
-          {/* Contenedor de la Imagen */}
+
+          {/* --- Image Container --- */}
           <div className="relative w-full md:w-3/5 h-64 md:h-auto overflow-hidden bg-surface-dark">
             <FadeImage
               src={image}
@@ -73,10 +85,9 @@ function ProjectCard({ projectKey, featured }) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-60 md:hidden" />
           </div>
 
-          {/* Contenedor de Texto */}
+          {/* --- Text Container --- */}
           <div className="relative z-20 flex flex-col justify-center p-6 md:p-8 md:w-2/5 bg-surface-card/40 md:bg-transparent">
-            
-            {/* Título unificado con el Badge de Featured */}
+
               {featured && (
                 <span className="w-fit px-2 py-0.5 mb-6 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-widest bg-brand-accent/10 border border-brand-accent/25 rounded-sm">
                   {t('projects.featured_label')}
@@ -102,20 +113,20 @@ function ProjectCard({ projectKey, featured }) {
                 </span>
               ))}
             </div>
-            
-            {/* Enlaces de acción */}
+
+            {/* --- Action Links --- */}
             <div className="flex items-center gap-4 mt-6">
-              <a 
-                href={links.demo} 
-                target="_blank" 
+              <a
+                href={links.demo}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors"
               >
                 <ExternalLink size={14} /> {t("projects.live_demo", "Demo")}
               </a>
-              <a 
-                href={links.github} 
-                target="_blank" 
+              <a
+                href={links.github}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors"
               >
@@ -164,17 +175,17 @@ function ProjectCard({ projectKey, featured }) {
         </div>
 
         <div className="px-5 pb-5 pt-2 flex items-center gap-4">
-          <a 
-            href={links.demo} 
-            target="_blank" 
+          <a
+            href={links.demo}
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light hover:text-brand-accent transition-colors"
           >
             <ExternalLink size={14} /> {t("projects.live_demo", "Demo")}
           </a>
-          <a 
-            href={links.github} 
-            target="_blank" 
+          <a
+            href={links.github}
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-light transition-colors"
           >
@@ -187,6 +198,10 @@ function ProjectCard({ projectKey, featured }) {
     </div>
   )
 }
+
+/* ==========================================================================
+   PROJECTS SECTION COMPONENT
+   ========================================================================== */
 
 export default function Projects() {
   const { t } = useTranslation()

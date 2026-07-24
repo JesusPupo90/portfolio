@@ -1,5 +1,13 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useTranslation } from 'react-i18next'
 import { Languages } from 'lucide-react'
+
+/* ==========================================================================
+   LANGUAGE TOGGLE COMPONENT
+   ========================================================================== */
 
 export default function LanguageToggle() {
   const { i18n } = useTranslation()

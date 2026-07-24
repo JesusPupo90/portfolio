@@ -1,3 +1,7 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useTranslation } from 'react-i18next'
 import { Plus, FileCode, Cpu, GitBranch, CheckCircle2 } from 'lucide-react'
 
@@ -28,14 +32,24 @@ const SDD_STEPS = [
   },
 ]
 
+/* ==========================================================================
+   ABOUT SDD COMPONENT
+   ========================================================================== */
+
 export default function AboutSDD() {
   const { t } = useTranslation()
+
+  /* ==========================================================================
+     RENDER / JSX
+     ========================================================================== */
 
   return (
     <section id="sdd" className="relative px-4 py-24 bg-[#09090b] overflow-hidden scroll-mt-16">
       <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-brand-accent/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
+
+        {/* --- Section Header --- */}
         <div className="relative mb-16">
           <Plus size={16} className="absolute -top-10 -left-6 text-surface-border/50 hidden lg:block" />
 
@@ -56,6 +70,7 @@ export default function AboutSDD() {
           <Plus size={16} className="absolute -bottom-10 -left-6 text-surface-border/50 hidden lg:block" />
         </div>
 
+        {/* --- Steps Grid --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SDD_STEPS.map((step) => {
             const Icon = step.icon

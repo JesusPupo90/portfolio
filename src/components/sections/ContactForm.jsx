@@ -1,10 +1,22 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Send, CheckCircle, AlertCircle, Plus } from 'lucide-react'
 import { IoLogoWhatsapp } from 'react-icons/io5'
 
+/* ==========================================================================
+   CONTACT FORM COMPONENT
+   ========================================================================== */
+
 export default function ContactForm() {
   const { t } = useTranslation()
+
+  /* ==========================================================================
+     STATE
+     ========================================================================== */
 
   const [formData, setFormData] = useState({
     name: '',
@@ -18,6 +30,10 @@ export default function ContactForm() {
   const whatsappNumber = '573012629385'
   const whatsappMessage = encodeURIComponent('Hola, vi tu portafolio y quisiera hablar contigo.')
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
+
+  /* ==========================================================================
+     HANDLERS & LOGIC
+     ========================================================================== */
 
   const validate = () => {
     let newErrors = {}
@@ -47,7 +63,7 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const validationErrors = validate()
-    
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       return
@@ -65,16 +81,20 @@ export default function ContactForm() {
     }
   }
 
+  /* ==========================================================================
+     RENDER / JSX
+     ========================================================================== */
+
   return (
     <section id="contact" className="relative px-4 py-24 bg-[#09090b] overflow-hidden scroll-mt-16">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent/[0.02] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        
-        {/* Cabecera unificada */}
+
+        {/* --- Section Header --- */}
         <div className="relative mb-12">
           <Plus size={16} className="absolute -top-10 -left-6 text-surface-border/50 hidden lg:block" />
-          
+
           <div className="flex items-center gap-3 mb-3">
             <span className="px-2 py-0.5 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-widest bg-brand-accent/10 border border-brand-accent/25 rounded-sm">
               {t('contact.badge', 'Contacto')}
@@ -84,25 +104,25 @@ export default function ContactForm() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-text-light tracking-tight">
             {t('contact.title', 'Trabajemos Juntos')}
           </h2>
-          
+
           <p className="text-text-muted mt-3 max-w-xl text-base sm:text-lg font-light">
             {t('contact.subtitle', '¿Tienes un proyecto en mente o buscas contratar a un desarrollador? Envíame un mensaje.')}
           </p>
-          
+
           <Plus size={16} className="absolute -bottom-10 -left-6 text-surface-border/50 hidden lg:block" />
         </div>
 
-        {/* Layout principal equilibrado */}
+        {/* --- Main Layout --- */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          
-          {/* Formulario Principal (Ocupa 2 columnas) */}
+
+          {/* --- Form (2 columns) --- */}
           <div className="lg:col-span-2 group relative">
             <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
-            
+
             <div className="relative bg-surface-card/20 border border-surface-border/50 rounded-sm p-6 sm:p-8 transition-all duration-500 hover:border-surface-border">
-              
+
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                
+
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-widest text-text-muted mb-2">
                     {t('contact.form.name', 'Tu Nombre')}
@@ -200,10 +220,10 @@ export default function ContactForm() {
             <Plus size={14} className="absolute -bottom-3 -right-3 text-surface-border/50 z-10 hidden md:block" />
           </div>
 
-          {/* Tarjeta Lateral de WhatsApp (Estilo original y con IoLogoWhatsapp) */}
+          {/* --- WhatsApp Card (1 column) --- */}
           <div className="lg:col-span-1 group relative">
             <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
-            
+
             <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm p-6 flex flex-col justify-between transition-all duration-500 hover:border-surface-border">
               <div>
                 <div className="w-10 h-10 rounded-sm bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent mb-6">
@@ -213,7 +233,7 @@ export default function ContactForm() {
                 <h3 className="text-xl font-sans font-bold text-text-light tracking-tight">
                   {t('contact.direct.title', '¿Prefieres mensajería instantánea?')}
                 </h3>
-                
+
                 <p className="text-text-muted text-sm font-light mt-3">
                   {t('contact.direct.desc', 'Contáctame directamente por WhatsApp para una respuesta más rápida.')}
                 </p>

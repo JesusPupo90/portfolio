@@ -1,9 +1,17 @@
+/* ==========================================================================
+   IMPORTS & CONFIG
+   ========================================================================== */
+
 import Navbar from './components/common/Navbar'
 import Hero from './components/sections/Hero'
 import Projects from './components/sections/Projects'
 import AboutSDD from './components/sections/AboutSDD'
 import ContactForm from './components/sections/ContactForm'
 import Footer from './components/common/Footer'
+
+/* ==========================================================================
+   APP COMPONENT
+   ========================================================================== */
 
 function App() {
   return (
