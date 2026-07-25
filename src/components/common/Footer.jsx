@@ -133,7 +133,7 @@ export default function Footer() {
             &copy; {currentYear} Jesus Pupo. {t('footer.rights', 'Todos los derechos reservados.')}
           </p>
           <p className="text-text-muted">
-            {t('footer.developedBy', 'Desarrollado por')}{' '}
+            {t('footer.developed_by', 'Desarrollado por')}{' '}
             <span className="text-brand-accent font-semibold font-poppins">Jesus Pupo</span> &bull;{' '}
             <span className="text-brand-light font-bold font-poppins">WannaDev Studios</span>
           </p>

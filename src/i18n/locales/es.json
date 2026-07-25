@@ -9,13 +9,13 @@
   "hero": {
     "badge": "Disponibilidad Inmediata",
     "role": "Desarrollador de Software",
-    "title": "Sistemas de gestión y plataformas de comercio web.",
-    "subtitle": "Transformo procesos complejos en soluciones digitales intuitivas que mejoran la experiencia del usuario y optimizan la operación de tu negocio.",
+    "title": "Transformo procesos complejos en software intuitivo.",
+    "subtitle": "Combino ingeniería de sistemas y desarrollo web para crear plataformas rápidas, seguras y diseñadas para resolver problemas reales de negocio.",
     "location": "Barranquilla, Colombia",
     "badges": {
-      "dev": "Desarrollador de Software",
-      "bilingual": "Bilingüe (ES/EN)",
-      "sdd": "Flujo SDD"
+      "dev": "React & Node.js",
+      "bilingual": "Soporte TI & Cloud",
+      "sdd": "Clean Architecture"
     },
     "cta_projects": "Ver Proyectos",
     "cta_contact": "Contáctame"
@@ -67,6 +67,7 @@
     "case_study": "Ver Especificación"
   },
   "contact": {
+    "badge": "contacto",
     "title": "Trabajemos Juntos",
     "subtitle": "¿Tienes un proyecto en mente o buscas contratar a un desarrollador? Envíame un mensaje.",
     "name_label": "Tu Nombre",
@@ -85,5 +86,9 @@
     "whatsapp_title": "¿Prefieres mensajería instantánea?",
     "whatsapp_description": "Contáctame directamente por WhatsApp para una respuesta más rápida.",
     "whatsapp_btn": "Chatear en WhatsApp"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "developed_by": "Desarrollado por"
   }
 }

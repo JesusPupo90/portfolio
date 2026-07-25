@@ -141,14 +141,14 @@ export default function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-widest text-text-muted mb-2">
-                    {t('contact.form.name', 'Tu Nombre')}
+                    {t('contact.name_label', 'Tu Nombre')}
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Juan Pérez"
+                    placeholder={t("contact.name_placeholder", "Juan Pérez")}
                     className={`w-full bg-surface-card/40 border rounded-sm px-4 py-3 text-text-light text-base focus:outline-none transition-colors ${
                       errors.name ? 'border-red-500/50' : 'border-surface-border/50 focus:border-brand-accent'
                     }`}
@@ -162,14 +162,14 @@ export default function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-widest text-text-muted mb-2">
-                    {t('contact.form.email', 'Tu Correo')}
+                    {t('contact.email_label', 'Tu Correo')}
                   </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="juan@ejemplo.com"
+                    placeholder={t("contact.email_placeholder", "juan@ejemplo.com")}
                     className={`w-full bg-surface-card/40 border rounded-sm px-4 py-3 text-text-light text-base focus:outline-none transition-colors ${
                       errors.email ? 'border-red-500/50' : 'border-surface-border/50 focus:border-brand-accent'
                     }`}
@@ -183,14 +183,14 @@ export default function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-widest text-text-muted mb-2">
-                    {t('contact.form.message', 'Mensaje')}
+                    {t('contact.message_label', 'Mensaje')}
                   </label>
                   <textarea
                     name="message"
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Cuéntame sobre tu proyecto..."
+                    placeholder={t("contact.message_placeholder", "Cuéntame sobre tu proyecto...")}
                     className={`w-full bg-surface-card/40 border rounded-sm px-4 py-3 text-text-light text-base focus:outline-none transition-colors resize-none ${
                       errors.message ? 'border-red-500/50' : 'border-surface-border/50 focus:border-brand-accent'
                     }`}
@@ -208,10 +208,10 @@ export default function ContactForm() {
                   className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-accent text-[#09090b] font-mono text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity rounded-sm disabled:opacity-50 cursor-pointer mt-2"
                 >
                   {status.submitting ? (
-                    t('contact.form.submitting', 'Enviando...')
+                    t('contact.sending_btn', 'Enviando...')
                   ) : (
                     <>
-                      <Send size={14} /> {t('contact.form.submit', 'Enviar Mensaje')}
+                      <Send size={14} /> {t('contact.send_btn', 'Enviar Mensaje')}
                     </>
                   )}
                 </button>
@@ -219,14 +219,14 @@ export default function ContactForm() {
                 {status.success && (
                   <div className="flex items-center gap-2 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-sm text-emerald-400 text-xs font-mono mt-2">
                     <CheckCircle size={16} />
-                    {t('contact.form.success', '¡Mensaje enviado con éxito! Te responderé pronto.')}
+                    {t('contact.success_msg', '¡Mensaje enviado con éxito! Te responderé pronto.')}
                   </div>
                 )}
 
                 {status.error && (
                   <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-sm text-red-400 text-xs font-mono mt-2">
                     <AlertCircle size={16} />
-                    {t('contact.form.error', 'Hubo un error al enviar el mensaje. Inténtalo de nuevo.')}
+                    {t('contact.error_submit', 'Hubo un error al enviar el mensaje. Inténtalo de nuevo.')}
                   </div>
                 )}
 
@@ -247,11 +247,11 @@ export default function ContactForm() {
                 </div>
 
                 <h3 className="text-xl font-sans font-bold text-text-light tracking-tight">
-                  {t('contact.direct.title', '¿Prefieres mensajería instantánea?')}
+                  {t('contact.whatsapp_title', '¿Prefieres mensajería instantánea?')}
                 </h3>
 
                 <p className="text-text-muted text-sm font-light mt-3">
-                  {t('contact.direct.desc', 'Contáctame directamente por WhatsApp para una respuesta más rápida.')}
+                  {t('contact.whatsapp_description', 'Contáctame directamente por WhatsApp para una respuesta más rápida.')}
                 </p>
               </div>
 
@@ -263,7 +263,7 @@ export default function ContactForm() {
                   className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-surface-card/40 border border-surface-border/60 hover:border-brand-accent/50 text-text-light hover:text-brand-accent text-xs font-mono font-medium rounded-sm transition-colors"
                 >
                   <IoLogoWhatsapp size={14} />
-                  {t('contact.whatsapp_button', 'Chatear en WhatsApp')}
+                  {t('contact.whatsapp_btn', 'Chatear en WhatsApp')}
                 </a>
               </div>
 

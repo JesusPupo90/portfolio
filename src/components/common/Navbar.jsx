@@ -9,7 +9,7 @@ import LanguageToggle from './LanguageToggle'
 
 const NAV_LINKS = [
   { key: 'projects', href: '#projects' },
-  { key: 'workflow', href: '#workflow' },
+  { key: 'workflow', href: '#sdd' },
   { key: 'contact', href: '#contact' },
 ]
 

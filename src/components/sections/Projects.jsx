@@ -7,11 +7,12 @@ import { useTranslation } from 'react-i18next'
 import { ExternalLink, Plus } from 'lucide-react'
 import { IoLogoGithub } from 'react-icons/io5'
 
-const PROJECT_IMAGES = {
+// Función estática que recibe el idioma actual y devuelve el objeto con las rutas
+const getProjectImages = (currentLanguage) => ({
   casamartha: '/projects/casa-martha-recovery.webp',
-  slice: '/projects/slice-pizzeria.webp',
-  aura: '/projects/aura-apparel.webp',
-}
+  slice: `/projects/slice-pizzeria-${currentLanguage}.webp`,
+  aura: `/projects/aura-apparel-${currentLanguage}.webp`,
+});
 
 const PROJECT_TAGS = {
   casamartha: ['React', 'Tailwind CSS', 'Vite', 'Mapbox SDK', 'React Router', 'Payments'],
@@ -62,12 +63,16 @@ function FadeImage({ src, alt, className }) {
    ========================================================================== */
 
 function ProjectCard({ projectKey, featured }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation() // Obtenemos la instancia i18n aquí
+  
   const title = t(`projects.items.${projectKey}.title`)
   const description = t(`projects.items.${projectKey}.description`)
   const tags = PROJECT_TAGS[projectKey]
-  const image = PROJECT_IMAGES[projectKey]
   const links = PROJECT_LINKS[projectKey]
+  
+  // Obtenemos las imágenes dinámicamente basadas en el idioma actual del componente
+  const projectImages = getProjectImages(i18n.language)
+  const image = projectImages[projectKey]
 
   if (featured) {
     return (

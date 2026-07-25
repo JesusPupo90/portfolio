@@ -9,13 +9,13 @@
   "hero": {
     "badge": "Immediate Availability",
     "role": "Software Developer",
-    "title": "Management systems and e-commerce platforms.",
-    "subtitle": "I transform complex processes into intuitive digital solutions that enhance the user experience and optimize your business operations.",
+    "title": "I transform complex processes into intuitive software.",
+    "subtitle": "I combine systems engineering and web development to build fast, secure platforms designed to solve real business problems.",
     "location": "Barranquilla, Colombia",
     "badges": {
-      "dev": "Software Developer",
-      "bilingual": "Bilingual (ES/EN)",
-      "sdd": "SDD Workflow"
+      "dev": "React & Node.js",
+      "bilingual": "IT Support & Cloud",
+      "sdd": "Clean Architecture"
     },
     "cta_projects": "View Projects",
     "cta_contact": "Get in Touch"
@@ -67,6 +67,7 @@
     "case_study": "View Spec"
   },
   "contact": {
+    "badge": "contact",
     "title": "Let's Work Together",
     "subtitle": "Have a project in mind or looking to hire? Send me a message.",
     "name_label": "Your Name",
@@ -85,5 +86,9 @@
     "whatsapp_title": "Prefer instant messaging?",
     "whatsapp_description": "Contact me directly on WhatsApp for a faster response.",
     "whatsapp_btn": "Chat on WhatsApp"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "developed_by": "Developed by"
   }
 }
