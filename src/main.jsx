@@ -9,7 +9,7 @@ import './index.css'
 import App from './App.jsx'
 import i18n from './i18n/index.js'
 
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 /* ==========================================================================
    RENDER
