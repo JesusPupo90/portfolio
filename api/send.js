@@ -12,7 +12,7 @@ import { Resend } from 'resend'
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 
-const EMAIL_FROM = 'Contact Portfolio <hello@jesuspupo.dev>'
+const EMAIL_DOMAIN = 'jesuspupo.dev'
 const EMAIL_TO = ['hello@jesuspupo.dev']
 const EMAIL_SUBJECT_PREFIX = 'Portfolio Contact'
 
@@ -110,7 +110,7 @@ export default async function handler(req, res) {
     const resend = new Resend(RESEND_API_KEY)
 
     const { data, error } = await resend.emails.send({
-      from: EMAIL_FROM,
+      from: `${name} <hello@${EMAIL_DOMAIN}>`,
       to: EMAIL_TO,
       subject: `${EMAIL_SUBJECT_PREFIX} — ${name}`,
       html: buildEmailHtml({ name, email, message }),
