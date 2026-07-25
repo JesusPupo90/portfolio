@@ -13,7 +13,7 @@ import { Resend } from 'resend'
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 
 const EMAIL_FROM = 'Contact Portfolio <hello@jesuspupo.dev>'
-const EMAIL_TO = ['hello@jesuspupo.dev']
+const EMAIL_TO = ['jpupolafaurie@gmail.com']
 const EMAIL_SUBJECT_PREFIX = 'Portfolio Contact'
 
 /* ==========================================================================
