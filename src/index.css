@@ -1,3 +1,15 @@
+/* Neutraliza el fondo blanco del autocompletado en navegadores basados en WebKit (Chrome/Edge) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #09090b inset !important; /* Cambia #09090b por el color exacto del fondo de tus tarjetas */
+  -webkit-text-fill-color: #f4f4f5 !important; /* El color de tu texto claro */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

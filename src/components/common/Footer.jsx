@@ -2,6 +2,7 @@
    IMPORTS & CONFIG
    ========================================================================== */
 
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Plus } from 'lucide-react'
 
@@ -51,6 +52,11 @@ const socialLinks = [
 export default function Footer() {
   const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
+  const [email, setEmail] = useState('')
+
+  useEffect(() => {
+    setEmail('hello' + '@' + 'jesuspupo.dev')
+  }, [])
 
   return (
     <footer className="relative bg-[#09090b] border-t border-surface-border/40">
@@ -111,10 +117,14 @@ export default function Footer() {
             <ul className="space-y-3 font-mono text-sm">
               <li>
                 <a
-                  href="mailto:hello@jesuspupo.dev"
+                  href={email ? `mailto:${email}` : '#'}
                   className="text-text-muted hover:text-brand-accent transition-colors duration-200"
                 >
-                  hello@jesuspupo.dev
+                  {email || (
+                    <span className="animate-pulse text-text-muted/50">
+                      Cargando correo...
+                    </span>
+                  )}
                 </a>
               </li>
               <li className="text-text-muted text-xs">
