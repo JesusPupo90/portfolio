@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Send, CheckCircle, AlertCircle, Plus } from 'lucide-react'
 import { IoLogoWhatsapp } from 'react-icons/io5'
+import { sendContactEmail } from '../../services/emailService'
 
 /* ==========================================================================
    CONTACT FORM COMPONENT
@@ -22,6 +23,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     message: '',
+    honeypot: '',
   })
 
   const [errors, setErrors] = useState({})
@@ -73,9 +75,9 @@ export default function ContactForm() {
     setStatus({ submitting: true, success: false, error: false })
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      await sendContactEmail(formData)
       setStatus({ submitting: false, success: true, error: false })
-      setFormData({ name: '', email: '', message: '' })
+      setFormData({ name: '', email: '', message: '', honeypot: '' })
     } catch (err) {
       setStatus({ submitting: false, success: false, error: true })
     }
@@ -122,6 +124,20 @@ export default function ContactForm() {
             <div className="relative bg-surface-card/20 border border-surface-border/50 rounded-sm p-6 sm:p-8 transition-all duration-500 hover:border-surface-border">
 
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+
+                {/* --- Honeypot (hidden anti-spam field) --- */}
+                <div aria-hidden="true" className="absolute -left-[9999px] opacity-0 pointer-events-none" tabIndex={-1}>
+                  <label htmlFor="contact-honeypot">Do not fill this field</label>
+                  <input
+                    id="contact-honeypot"
+                    name="honeypot"
+                    type="text"
+                    value={formData.honeypot}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
 
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-widest text-text-muted mb-2">
