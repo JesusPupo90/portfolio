@@ -8,6 +8,7 @@ export async function sendContactEmail(formData) {
     email: formData.email,
     message: formData.message,
     honeypot: formData.honeypot || '',
+    consent: !!formData.consent,
   }
 
   try {

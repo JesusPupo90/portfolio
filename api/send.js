@@ -20,11 +20,18 @@ const EMAIL_SUBJECT_PREFIX = 'Portfolio Contact'
    HELPERS
    ========================================================================== */
 
-function buildEmailHtml({ name, email, message }) {
+function buildEmailHtml({ name, email, message, consent }) {
   const date = new Date().toLocaleString('en-US', {
     dateStyle: 'long',
     timeStyle: 'short',
   })
+
+  const consentNote = consent
+    ? `
+            <div class="divider"></div>
+            <div class="label">Privacy Consent</div>
+            <div class="value">Consentimiento de privacidad aceptado &middot; ${date}</div>`
+    : ''
 
   return `
     <!DOCTYPE html>
@@ -53,6 +60,7 @@ function buildEmailHtml({ name, email, message }) {
             <div class="divider"></div>
             <div class="label">Message</div>
             <div class="value">${escapeHtml(message).replace(/\n/g, '<br>')}</div>
+            ${consentNote}
             <div class="divider"></div>
             <div class="footer">Sent from jesuspupo.dev &middot; Portfolio Contact Form</div>
           </div>
@@ -81,7 +89,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, message, honeypot } = req.body || {}
+  const { name, email, message, honeypot, consent } = req.body || {}
 
   /* --- Honeypot Anti-Spam --- */
   if (honeypot) {
@@ -113,7 +121,7 @@ export default async function handler(req, res) {
       from: `${name} <hello@${EMAIL_DOMAIN}>`,
       to: EMAIL_TO,
       subject: `${EMAIL_SUBJECT_PREFIX} — ${name}`,
-      html: buildEmailHtml({ name, email, message }),
+      html: buildEmailHtml({ name, email, message, consent: consent === true }),
       replyTo: email,
     })
 

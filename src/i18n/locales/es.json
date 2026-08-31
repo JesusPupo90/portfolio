@@ -189,7 +189,17 @@
     "error_submit": "Algo salió mal. Intenta de nuevo.",
     "whatsapp_title": "¿Prefieres mensajería instantánea?",
     "whatsapp_description": "Contáctame directamente por WhatsApp para una respuesta más rápida.",
-    "whatsapp_btn": "Chatear en WhatsApp"
+    "whatsapp_btn": "Chatear en WhatsApp",
+    "privacy_notice": "Al enviar este formulario aceptas cómo se tratan tus datos de contacto.",
+    "privacy_expand": "Leer aviso completo",
+    "privacy_full": [
+      "Responsable del tratamiento: Jesus Pupo (WannaDev Studios) — jesuspupo.dev. Datos recogidos: nombre, correo electrónico y mensaje.",
+      "Finalidad: responder a tu consulta. Los datos se envían por correo electrónico a través del proveedor de email Resend y no se almacenan en una base de datos.",
+      "No compartimos ni vendemos tus datos a terceros. Se conservan solo mientras la conversación lo requiera y puedes solicitar su eliminación en cualquier momento.",
+      "Tienes derecho a acceder, rectificar, suprimir y oponerte al tratamiento de tus datos (Ley 1581 de 2012 — habeas data) escribiendo a hello@jesuspupo.dev."
+    ],
+    "privacy_consent_label": "He leído y acepto el aviso de privacidad.",
+    "privacy_required": "Debes aceptar el aviso de privacidad para continuar."
   },
   "footer": {
     "rights": "Todos los derechos reservados.",

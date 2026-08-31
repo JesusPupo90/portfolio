@@ -189,7 +189,17 @@
     "error_submit": "Something went wrong. Please try again.",
     "whatsapp_title": "Prefer instant messaging?",
     "whatsapp_description": "Contact me directly on WhatsApp for a faster response.",
-    "whatsapp_btn": "Chat on WhatsApp"
+    "whatsapp_btn": "Chat on WhatsApp",
+    "privacy_notice": "By submitting this form you accept how your contact data is processed.",
+    "privacy_expand": "Read full privacy notice",
+    "privacy_full": [
+      "Data controller: Jesus Pupo (WannaDev Studios) — jesuspupo.dev. Data collected: name, email address and message.",
+      "Purpose: to respond to your inquiry. Data is sent by email through the email provider Resend and is not stored in a database.",
+      "We do not share or sell your data to third parties. It is kept only as long as the conversation requires, and you may request its deletion at any time.",
+      "You have the right to access, rectify, delete and object to the processing of your data (Colombian Law 1581 of 2012 — habeas data) by writing to hello@jesuspupo.dev."
+    ],
+    "privacy_consent_label": "I have read and accept the privacy notice.",
+    "privacy_required": "You must accept the privacy notice to continue."
   },
   "footer": {
     "rights": "All rights reserved.",

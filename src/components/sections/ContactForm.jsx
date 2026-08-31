@@ -24,6 +24,7 @@ export default function ContactForm() {
     email: '',
     message: '',
     honeypot: '',
+    consent: false,
   })
 
   const [errors, setErrors] = useState({})
@@ -32,6 +33,8 @@ export default function ContactForm() {
   const whatsappNumber = '573012629385'
   const whatsappMessage = encodeURIComponent('Hola, vi tu portafolio y quisiera hablar contigo.')
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
+
+  const privacyParagraphs = t('contact.privacy_full', { returnObjects: true }) || []
 
   /* ==========================================================================
      HANDLERS & LOGIC
@@ -52,6 +55,9 @@ export default function ContactForm() {
     } else if (formData.message.trim().length < 10) {
       newErrors.message = t('contact.errors.message_min', 'El mensaje debe tener al menos 10 caracteres.')
     }
+    if (!formData.consent) {
+      newErrors.consent = t('contact.privacy_required', 'Debes aceptar el aviso de privacidad para continuar.')
+    }
     return newErrors
   }
 
@@ -59,6 +65,13 @@ export default function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: null })
+    }
+  }
+
+  const handleConsent = (e) => {
+    setFormData({ ...formData, consent: e.target.checked })
+    if (errors.consent) {
+      setErrors({ ...errors, consent: null })
     }
   }
 
@@ -77,8 +90,8 @@ export default function ContactForm() {
     try {
       await sendContactEmail(formData)
       setStatus({ submitting: false, success: true, error: false })
-      setFormData({ name: '', email: '', message: '', honeypot: '' })
-    } catch (err) {
+      setFormData({ name: '', email: '', message: '', honeypot: '', consent: false })
+    } catch {
       setStatus({ submitting: false, success: false, error: true })
     }
   }
@@ -198,6 +211,43 @@ export default function ContactForm() {
                   {errors.message && (
                     <span className="flex items-center gap-1 text-xs text-red-400 mt-1.5 font-mono">
                       <AlertCircle size={12} /> {errors.message}
+                    </span>
+                  )}
+                </div>
+
+                {/* --- Privacy Notice & Consent --- */}
+                <div className="space-y-3 pt-1">
+                  <details className="group bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden">
+                    <summary className="cursor-pointer list-none flex items-center justify-between gap-3 px-4 py-3 text-xs font-mono text-text-muted hover:text-text-light transition-colors">
+                      <span>{t('contact.privacy_notice', 'Al enviar aceptas cómo se tratan tus datos.')}</span>
+                      <span className="shrink-0 text-[10px] uppercase tracking-widest text-brand-accent group-open:hidden">
+                        {t('contact.privacy_expand', 'Leer aviso completo')}
+                      </span>
+                    </summary>
+                    <div className="px-4 pb-4 space-y-3">
+                      {privacyParagraphs.map((paragraph, i) => (
+                        <p key={i} className="text-xs text-text-muted font-light leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </details>
+
+                  <label className="flex items-start gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleConsent}
+                      className={`mt-0.5 w-4 h-4 rounded-sm accent-brand-accent cursor-pointer ${errors.consent ? 'border-red-500/60' : ''}`}
+                    />
+                    <span className={`text-xs font-light leading-relaxed ${errors.consent ? 'text-red-400' : 'text-text-muted'}`}>
+                      {t('contact.privacy_consent_label', 'He leído y acepto el aviso de privacidad.')}
+                    </span>
+                  </label>
+                  {errors.consent && (
+                    <span className="flex items-center gap-1 text-xs text-red-400 font-mono">
+                      <AlertCircle size={12} /> {errors.consent}
                     </span>
                   )}
                 </div>
