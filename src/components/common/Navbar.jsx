@@ -101,7 +101,9 @@ export default function Navbar() {
           <div className="flex items-center gap-3 pt-2">
             <a
               href="/docs/CV_Jesus_Pupo_Software_Developer.pdf"
-              download
+              download="Jesus_Pupo_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium
                 bg-brand-accent text-[#09090b] rounded-lg
