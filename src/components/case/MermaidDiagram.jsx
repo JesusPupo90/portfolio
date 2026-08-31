@@ -3,8 +3,7 @@
    ========================================================================== */
 
 import { useEffect, useRef, useState } from 'react'
-
-const cleanChart = (chart) => chart.replace(/%%\{init:[\s\S]*?\}%%/g, '').trim()
+import { buildMermaidConfig, cleanChart } from './mermaidConfig'
 
 export default function MermaidDiagram({ chart, onRendered, className }) {
   const [svg, setSvg] = useState('')
@@ -17,36 +16,7 @@ export default function MermaidDiagram({ chart, onRendered, className }) {
     async function render() {
       try {
         const mermaid = (await import('mermaid')).default
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: 'dark',
-          themeVariables: {
-            background: '#09090b',
-            primaryColor: '#18181b',
-            primaryBorderColor: '#27272a',
-            primaryTextColor: '#f4f4f5',
-            secondaryColor: '#18181b',
-            secondaryBorderColor: '#27272a',
-            tertiaryColor: '#18181b',
-            lineColor: '#a1a1aa',
-            arrowheadColor: '#a1a1aa',
-            fontSize: '14px',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            actorBkg: '#18181b',
-            actorBorder: '#27272a',
-            actorTextColor: '#f4f4f5',
-            noteBkgColor: '#18181b',
-            noteBorderColor: '#27272a',
-            noteTextColor: '#a1a1aa',
-            signalColor: '#f4f4f5',
-            signalTextColor: '#f4f4f5',
-            labelBoxBkgColor: '#18181b',
-            labelBoxBorderColor: '#27272a',
-            labelTextColor: '#f4f4f5',
-          },
-          flowchart: { htmlLabels: true, curve: 'basis', padding: 16, useMaxWidth: true },
-          sequence: { mirrorActors: false, actorMargin: 40, messageMargin: 30, wrap: true, useMaxWidth: true },
-        })
+        mermaid.initialize(buildMermaidConfig(true))
 
         const { svg: renderedSvg } = await mermaid.render(renderId.current, cleanChart(chart))
         if (!cancelled) {

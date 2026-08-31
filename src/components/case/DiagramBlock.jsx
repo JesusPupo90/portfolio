@@ -2,11 +2,12 @@
    DIAGRAM BLOCK (mermaid + ampliar + descargar PNG/SVG)
    ========================================================================== */
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Maximize2, FileImage, FileCode } from 'lucide-react'
 import MermaidDiagram from './MermaidDiagram'
 import Lightbox from './Lightbox'
+import { buildMermaidConfig, sanitizeChartForExport } from './mermaidConfig'
 
 const K = 'projects.case.lamagiadecantar.diagrams.actions'
 
@@ -21,31 +22,79 @@ const downloadBlob = (blob, name) => {
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
+const toExportableSvg = (svgStr) => {
+  const openIdx = svgStr.indexOf('<svg')
+  const closeIdx = svgStr.indexOf('>', openIdx)
+  if (openIdx === -1 || closeIdx === -1) return svgStr
+
+  const openTag = svgStr.slice(openIdx, closeIdx + 1)
+  const rest = svgStr.slice(closeIdx + 1)
+  const vb = openTag.match(/viewBox="([^"]+)"/)
+
+  let tag = openTag.replace(/style="[^"]*"/, '')
+
+  if (vb) {
+    const parts = vb[1].trim().split(/\s+/).map(Number)
+    if (parts.length === 4 && parts[2] > 0 && parts[3] > 0) {
+      tag = tag
+        .replace(/width="[^"]*"/, `width="${parts[2]}"`)
+        .replace(/height="[^"]*"/, `height="${parts[3]}"`)
+      if (!/height="/.test(tag)) tag = tag.replace(/^<svg/, `<svg height="${parts[3]}"`)
+    }
+  }
+
+  return tag + rest
+}
+
 export default function DiagramBlock({ chart, fileName, label }) {
   const { t } = useTranslation()
   const [svg, setSvg] = useState('')
   const [open, setOpen] = useState(false)
+  const exportSvgRef = useRef(null)
+  const exportPromiseRef = useRef(null)
 
   const btn = (k) => t(`${K}.${k}`)
 
-  const downloadSvg = () => {
-    if (!svg) return
-    downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), `${fileName}.svg`)
+  /* Re-render the chart with htmlLabels:false so the exported SVG is plain,
+     valid XML (no embedded HTML/foreignObject) — required for crisp PNG export. */
+  const getExportSvg = () => {
+    if (exportSvgRef.current) return Promise.resolve(exportSvgRef.current)
+    if (!exportPromiseRef.current) {
+      exportPromiseRef.current = (async () => {
+        const mermaid = (await import('mermaid')).default
+        mermaid.initialize(buildMermaidConfig(false))
+        const renderId = 'mmd-exp-' + Math.random().toString(36).slice(2)
+        const { svg: renderedSvg } = await mermaid.render(renderId, sanitizeChartForExport(chart))
+        exportSvgRef.current = toExportableSvg(renderedSvg)
+        return exportSvgRef.current
+      })()
+    }
+    return exportPromiseRef.current
   }
 
-  const downloadPng = () => {
-    if (!svg) return
-    const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' })
+  const downloadSvg = async () => {
+    const exportSvg = await getExportSvg()
+    downloadBlob(new Blob([exportSvg], { type: 'image/svg+xml;charset=utf-8' }), `${fileName}.svg`)
+  }
+
+  const downloadPng = async () => {
+    const exportSvg = await getExportSvg()
+    const blob = new Blob([exportSvg], { type: 'image/svg+xml;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const img = new Image()
     img.onload = () => {
-      const scale = 2
+      const vb = exportSvg.match(/viewBox="[^"]* ([\d.]+) ([\d.]+)"/)
+      const width = vb ? parseFloat(vb[1]) : img.naturalWidth || 1200
+      const height = vb ? parseFloat(vb[2]) : img.naturalHeight || 800
+      const scale = Math.min(2, 6000 / width)
       const canvas = document.createElement('canvas')
-      canvas.width = (img.naturalWidth || 1200) * scale
-      canvas.height = (img.naturalHeight || 800) * scale
+      canvas.width = Math.round(width * scale)
+      canvas.height = Math.round(height * scale)
       const ctx = canvas.getContext('2d')
       ctx.fillStyle = '#09090b'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
+      ctx.imageSmoothingEnabled = true
+      ctx.imageSmoothingQuality = 'high'
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       canvas.toBlob((b) => {
         if (b) downloadBlob(b, `${fileName}.png`)
