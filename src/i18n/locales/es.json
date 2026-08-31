@@ -48,6 +48,10 @@
     "subtitle": "Aplicaciones web reales y demostraciones técnicas funcionales.",
     "featured_label": "Proyecto Destacado",
     "items": {
+      "lamagiadecantar": {
+        "title": "La Magia de Cantar",
+        "description": "Plataforma de transformación vocal en producción real: catálogo de planes, checkout con Mercado Pago, prueba de voz con IA y seguimiento de órdenes con base de datos."
+      },
       "casamartha": {
         "title": "Casa Martha Recovery",
         "description": "Landing page de alta conversión para hospedaje y recuperación. Arquitectura de UI optimizada para captación de leads en el sector hospedaje."
@@ -64,7 +68,107 @@
     "status_in_dev": "Especificación de Arquitectura y En Desarrollo",
     "live_demo": "Live Demo",
     "source_code": "Código",
-    "case_study": "Ver Especificación"
+    "case_study": "Ver Especificación",
+    "view_case_study": "Ver caso de estudio",
+    "more_projects_title": "¿Buscas más?",
+    "more_projects_desc": "Todos mis proyectos y experimentos en GitHub.",
+    "more_projects_cta": "Ver más en GitHub",
+    "case": {
+      "lamagiadecantar": {
+        "badge": "CASO DE ESTUDIO",
+        "client": "Yanetsis Alfonso — Coach vocal de TV",
+        "role": "Desarrollo Full-Stack",
+        "year": "2026",
+        "title": "La Magia de Cantar",
+        "subtitle": "Plataforma de transformación vocal en producción para una clienta real: venta de planes con pasarela de pagos, prueba de voz con IA y base de datos en vivo.",
+        "cta_demo": "Ver sitio en vivo",
+        "cta_code": "Ver código en GitHub",
+        "back": "Volver a proyectos",
+        "overview": {
+          "label": "Visión general",
+          "title": "Un sistema vivo, no una demo",
+          "p1": "La Magia de Cantar es la plataforma de la coach vocal de televisión Yanetsis Alfonso. No es un prototipo: es el sistema en producción con el que la clienta vende sus clases, recibe pagos reales y gestiona sus estudiantes. Es el único proyecto del portafolio con backend, base de datos y pasarela de pagos operando en vivo.",
+          "p2": "El frontend destaca por un diseño distintivo de alto contraste con acentos dorados, orientado a convertir visitantes en estudiantes: cada sección guía al usuario desde el descubrimiento del método hasta la compra de un plan."
+        },
+        "stack": {
+          "label": "Stack",
+          "title": "Tecnologías",
+          "subtitle": "Next.js (App Router + TypeScript), PostgreSQL (Supabase), Mercado Pago, Resend, Vercel."
+        },
+        "problem": {
+          "label": "El problema",
+          "title": "Vender formación vocal en línea de forma confiable",
+          "items": [
+            "La clienta vendía sus clases por WhatsApp y transferencias manuales: sin registro, sin confirmación automática y con riesgo de errores en los pagos.",
+            "Necesitaba un catálogo de planes claro (mensual, trimestral, anual) y un checkout que cobrara en línea de forma segura.",
+            "El proceso debía ser confiable para el estudiante y auditado para ella: quién pagó, cuánto, y el estado real de cada orden."
+          ]
+        },
+        "solution": {
+          "label": "La solución",
+          "title": "Catálogo + checkout + confirmación automática",
+          "items": [
+            "El estudiante elige un servicio y un plan desde el catálogo que se lee de la base de datos.",
+            "Un formulario de checkout captura los datos del estudiante y del pagador, con validación y protección anti-spam."
+          ]
+        },
+        "diagrams": {
+          "actions": {
+            "zoom": "Ampliar",
+            "png": "Descargar PNG",
+            "svg": "Descargar SVG",
+            "download": "Descargar"
+          },
+          "architecture": {
+            "label": "Arquitectura",
+            "title": "Arquitectura del módulo de pagos",
+            "intro": "Así se conectan los sistemas: el navegador habla con el servidor Next.js, que coordina la base de datos (Supabase), la pasarela de pagos (Mercado Pago) y el correo transaccional (Resend). Todo el dinero pasa por la pasarela; el servidor nunca confía en datos del cliente.",
+            "takeaways_label": "Qué pasa aquí",
+            "takeaways": [
+              "El catálogo de servicios y planes se lee de la base de datos, no está escrito en el código.",
+              "El pago se cobra con Mercado Pago mediante un token; el monto siempre se calcula en el servidor.",
+              "Los avisos de pago llegan por webhook con firma verificada, se validan contra el estado real del pago y se registran en la base de datos.",
+              "Un cron expira las órdenes abandonadas y mantiene la base de datos limpia."
+            ]
+          },
+          "process": {
+            "label": "Proceso",
+            "title": "Flujo del proceso de pago",
+            "intro": "La secuencia completa, desde que el usuario elige un plan hasta la confirmación por email. Las flechas sólidas son peticiones; las punteadas, respuestas y avisos asíncronos.",
+            "takeaways_label": "Qué pasa aquí",
+            "takeaways": [
+              "La orden se crea primero en estado 'draft' y solo avanza si el pago se aprueba.",
+              "El pago se confirma dos veces: en línea por la respuesta de la pasarela y luego por webhook.",
+              "Hay una reconciliación anti-fraude: el monto pagado debe coincidir con el precio oficial de la orden.",
+              "El email de confirmación se envía una sola vez (protección anti-duplicados)."
+            ]
+          }
+        },
+        "features": {
+          "label": "Funcionalidades",
+          "title": "Lo que el sistema hace",
+          "items": [
+            { "title": "Checkout con Mercado Pago", "description": "Tarjeta, PSE y efectivo mediante Payment Brick; wallet con preferencia para métodos adicionales." },
+            { "title": "Planes del catálogo", "description": "Servicios con variantes mensual, trimestral y anual, leídos desde la base de datos." },
+            { "title": "Prueba de voz con IA", "description": "Los visitantes graban y reciben un veredicto personalizado antes de comprar." },
+            { "title": "Cotización corporativa", "description": "Formulario multi-paso para empresas e instituciones que solicitan entrenamiento vocal." },
+            { "title": "Webhooks y reconciliación", "description": "Verificación de firma, idempotencia y validación de montos contra la orden." },
+            { "title": "Correos transaccionales", "description": "Confirmación de compra con expectativas del servicio vía Resend." }
+          ]
+        },
+        "value": {
+          "label": "Valor de negocio",
+          "title": "Por qué importa",
+          "items": [
+            "La clienta vende en línea con pagos seguros y automatizados, sin depender de transferencias manuales.",
+            "Cada estudiante tiene una orden con estado claro: aprobado, pendiente o rechazado.",
+            "El flujo de pago está protegido: montos calculados en servidor, webhooks validados y correos anti-duplicados.",
+            "Es un sistema real en producción: la evidencia de que el trabajo llega hasta el despliegue y el cobro."
+          ]
+        },
+        "footer_note": "Código con datos del cliente sanitizados. El sistema opera en producción en lamagiadecantar.co."
+      }
+    }
   },
   "contact": {
     "badge": "contacto",

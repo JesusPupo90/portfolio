@@ -1,3 +1,9 @@
+/* Diagramas Mermaid: líneas conectoras un poco más gruesas para mejor legibilidad */
+.mermaid-svg .flowchart-link,
+.mermaid-svg .edge-thickness-normal {
+  stroke-width: 1.5px;
+}
+
 /* Neutraliza el fondo blanco del autocompletado en navegadores basados en WebKit (Chrome/Edge) */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

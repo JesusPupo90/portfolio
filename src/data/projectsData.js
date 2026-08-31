@@ -4,6 +4,14 @@
 
 export const projects = [
   {
+    id: 'lamagiadecantar',
+    title: 'La Magia de Cantar',
+    category: 'E-commerce / Plataforma de pagos',
+    description: 'Plataforma de transformación vocal en producción con checkout y pasarela de pagos.',
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Mercado Pago'],
+    status: 'production',
+  },
+  {
     id: 'casa-martha',
     title: 'Casa Martha Recovery',
     category: 'Hospitality & Lead Generation',

@@ -4,22 +4,29 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ExternalLink, Plus } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ExternalLink, Plus, ArrowUpRight } from 'lucide-react'
 import { IoLogoGithub } from 'react-icons/io5'
 
 const getProjectImages = (currentLanguage) => ({
+  lamagiadecantar: '/projects/lamagiadecantar.webp',
   casamartha: '/projects/casa-martha-recovery.webp',
   slice: `/projects/slice-pizzeria-${currentLanguage}.webp`,
   aura: `/projects/aura-apparel-${currentLanguage}.webp`,
 });
 
 const PROJECT_TAGS = {
+  lamagiadecantar: ['Next.js', 'TypeScript', 'PostgreSQL', 'Mercado Pago'],
   casamartha: ['React', 'Tailwind CSS', 'Vite', 'Mapbox SDK', 'React Router', 'Payments'],
   slice: ['React', 'Tailwind CSS', 'Vite', 'i18next', 'Context API'],
   aura: ['React', 'Tailwind CSS', 'Vite', 'i18next', 'Context API'],
 }
 
 const PROJECT_LINKS = {
+  lamagiadecantar: {
+    demo: 'https://lamagiadecantar.co',
+    github: 'https://github.com/JesusPupo90/la-magia-de-cantar',
+  },
   casamartha: {
     demo: 'https://casa-martha-recovery.vercel.app',
     github: 'https://github.com/JesusPupo90/casa-martha',
@@ -33,6 +40,8 @@ const PROJECT_LINKS = {
     github: 'https://github.com/JesusPupo90/aura-apparel-store',
   },
 }
+
+const CASE_STUDY_SLUG = 'lamagiadecantar'
 
 /* ==========================================================================
    FADE IMAGE COMPONENT
@@ -68,6 +77,7 @@ function ProjectCard({ projectKey, featured }) {
   const description = t(`projects.items.${projectKey}.description`)
   const tags = PROJECT_TAGS[projectKey]
   const links = PROJECT_LINKS[projectKey]
+  const hasCaseStudy = projectKey === CASE_STUDY_SLUG
   
   const projectImages = getProjectImages(i18n.language)
   const image = projectImages[projectKey]
@@ -76,14 +86,14 @@ function ProjectCard({ projectKey, featured }) {
     return (
       <div className="md:col-span-2 group relative">
         <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
-        <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden transition-all duration-500 hover:border-surface-border flex flex-col md:flex-row">
+        <div className="relative h-full bg-surface-card/20 border border-surface-border/50 rounded-sm overflow-hidden transition-all duration-500 hover:border-brand-accent/60 flex flex-col md:flex-row">
 
           {/* --- Image Container --- */}
           <div className="relative w-full md:w-3/5 h-64 md:h-auto overflow-hidden bg-surface-dark">
             <FadeImage
               src={image}
               alt={title}
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover object-left-top group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-60 md:hidden" />
           </div>
@@ -91,7 +101,11 @@ function ProjectCard({ projectKey, featured }) {
           {/* --- Text Container --- */}
           <div className="relative z-20 flex flex-col justify-center p-6 md:p-8 md:w-2/5 bg-surface-card/40 md:bg-transparent">
 
-              {featured && (
+              {hasCaseStudy ? (
+                <span className="w-fit px-2 py-0.5 mb-6 text-[10px] font-mono font-semibold text-brand-highlight uppercase tracking-widest bg-brand-highlight/10 border border-brand-highlight/25 rounded-sm">
+                  {t('projects.case.lamagiadecantar.badge')}
+                </span>
+              ) : (
                 <span className="w-fit px-2 py-0.5 mb-6 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-widest bg-brand-accent/10 border border-brand-accent/25 rounded-sm">
                   {t('projects.featured_label')}
                 </span>
@@ -118,7 +132,7 @@ function ProjectCard({ projectKey, featured }) {
             </div>
 
             {/* --- Action Links --- */}
-            <div className="flex items-center gap-4 mt-6">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-6">
               <a
                 href={links.demo}
                 target="_blank"
@@ -135,6 +149,14 @@ function ProjectCard({ projectKey, featured }) {
               >
                 <IoLogoGithub size={14} /> {t("projects.source_code", "Código")}
               </a>
+              {hasCaseStudy && (
+                <Link
+                  to={`/projects/${CASE_STUDY_SLUG}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-brand-highlight hover:text-brand-accent transition-colors"
+                >
+                  <ArrowUpRight size={14} /> {t("projects.view_case_study")}
+                </Link>
+              )}
             </div>
           </div>
 
@@ -203,6 +225,40 @@ function ProjectCard({ projectKey, featured }) {
 }
 
 /* ==========================================================================
+   MORE PROJECTS CTA CARD
+   ========================================================================== */
+
+function MoreProjectsCard() {
+  const { t } = useTranslation()
+
+  return (
+    <div className="group relative">
+      <Plus size={14} className="absolute -top-3 -left-3 text-surface-border/50 z-10 hidden md:block" />
+      <a
+        href="https://github.com/JesusPupo90"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative h-full min-h-[320px] flex flex-col items-center justify-center gap-4 p-8 bg-surface-card/20 border border-dashed border-surface-border/60 rounded-sm transition-all duration-500 hover:border-brand-accent/60 group"
+      >
+        <IoLogoGithub size={40} className="text-text-muted group-hover:text-brand-accent transition-colors" />
+        <div className="text-center">
+          <h3 className="text-lg font-sans font-bold text-text-light tracking-tight">
+            {t('projects.more_projects_title')}
+          </h3>
+          <p className="text-text-muted font-light mt-2 text-sm max-w-[220px] mx-auto">
+            {t('projects.more_projects_desc')}
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-light group-hover:text-brand-accent transition-colors">
+          {t('projects.more_projects_cta')} <ArrowUpRight size={14} />
+        </span>
+      </a>
+      <Plus size={14} className="absolute -bottom-3 -right-3 text-surface-border/50 z-10 hidden md:block" />
+    </div>
+  )
+}
+
+/* ==========================================================================
    PROJECTS SECTION COMPONENT
    ========================================================================== */
 
@@ -224,9 +280,11 @@ export default function Projects() {
           <Plus size={16} className="absolute -bottom-10 -left-6 text-surface-border/50 hidden lg:block" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ProjectCard projectKey="casamartha" featured />
+          <ProjectCard projectKey="lamagiadecantar" featured />
+          <ProjectCard projectKey="casamartha" />
           <ProjectCard projectKey="slice" />
           <ProjectCard projectKey="aura" />
+          <MoreProjectsCard />
         </div>
       </div>
     </section>

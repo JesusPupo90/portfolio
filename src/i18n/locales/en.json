@@ -48,6 +48,10 @@
     "subtitle": "Real-world web applications and functional technical demos.",
     "featured_label": "Featured Project",
     "items": {
+      "lamagiadecantar": {
+        "title": "La Magia de Cantar",
+        "description": "Vocal transformation platform running in production: plan catalog, Mercado Pago checkout, AI voice test, and order tracking backed by a real database."
+      },
       "casamartha": {
         "title": "Casa Martha Recovery",
         "description": "High-conversion landing page for lodging and recovery. UI architecture optimized for lead generation in the lodging industry."
@@ -64,7 +68,107 @@
     "status_in_dev": "Architecture Spec & In Development",
     "live_demo": "Live Demo",
     "source_code": "Code",
-    "case_study": "View Spec"
+    "case_study": "View Spec",
+    "view_case_study": "View Case Study",
+    "more_projects_title": "Looking for more?",
+    "more_projects_desc": "All my projects and experiments on GitHub.",
+    "more_projects_cta": "See more on GitHub",
+    "case": {
+      "lamagiadecantar": {
+        "badge": "CASE STUDY",
+        "client": "Yanetsis Alfonso — TV vocal coach",
+        "role": "Full-Stack Development",
+        "year": "2026",
+        "title": "La Magia de Cantar",
+        "subtitle": "Vocal transformation platform in production for a real client: plan sales with a payment gateway, AI voice test, and a live database.",
+        "cta_demo": "View live site",
+        "cta_code": "View code on GitHub",
+        "back": "Back to projects",
+        "overview": {
+          "label": "Overview",
+          "title": "A live system, not a demo",
+          "p1": "La Magia de Cantar is the platform of TV vocal coach Yanetsis Alfonso. It is not a prototype: it is the production system the client uses to sell her classes, receive real payments, and manage her students. It is the only project in the portfolio with a backend, database, and payment gateway running live.",
+          "p2": "The frontend features a distinctive high-contrast design with golden accents, built to turn visitors into students: every section guides the user from discovering the method to purchasing a plan."
+        },
+        "stack": {
+          "label": "Stack",
+          "title": "Technologies",
+          "subtitle": "Next.js (App Router + TypeScript), PostgreSQL (Supabase), Mercado Pago, Resend, Vercel."
+        },
+        "problem": {
+          "label": "The problem",
+          "title": "Selling vocal training online, reliably",
+          "items": [
+            "The client used to sell her classes through WhatsApp and manual transfers: no records, no automatic confirmation, and payment errors were common.",
+            "She needed a clear plan catalog (monthly, quarterly, yearly) and a checkout that charged online securely.",
+            "The process had to be reliable for the student and auditable for her: who paid, how much, and the real status of every order."
+          ]
+        },
+        "solution": {
+          "label": "The solution",
+          "title": "Catalog + checkout + automatic confirmation",
+          "items": [
+            "The student picks a service and a plan from a catalog read from the database.",
+            "A checkout form captures student and payer data with validation and anti-spam protection."
+          ]
+        },
+        "diagrams": {
+          "actions": {
+            "zoom": "Expand",
+            "png": "Download PNG",
+            "svg": "Download SVG",
+            "download": "Download"
+          },
+          "architecture": {
+            "label": "Architecture",
+            "title": "Payment module architecture",
+            "intro": "This is how the systems connect: the browser talks to the Next.js server, which orchestrates the database (Supabase), the payment gateway (Mercado Pago), and transactional email (Resend). All money goes through the gateway; the server never trusts client data.",
+            "takeaways_label": "What's happening here",
+            "takeaways": [
+              "The service and plan catalog is read from the database, not hard-coded.",
+              "Payment is charged through Mercado Pago using a token; the amount is always computed server-side.",
+              "Payment notifications arrive by webhook with a verified signature, are checked against the real payment status, and are logged in the database.",
+              "A cron expires abandoned orders and keeps the database clean."
+            ]
+          },
+          "process": {
+            "label": "Process",
+            "title": "Payment process flow",
+            "intro": "The full sequence, from choosing a plan to the email confirmation. Solid arrows are requests; dashed ones are responses and async notifications.",
+            "takeaways_label": "What's happening here",
+            "takeaways": [
+              "The order is created first as 'draft' and only advances once the payment is approved.",
+              "Payment is confirmed twice: inline via the gateway response and later via webhook.",
+              "There is an anti-fraud reconciliation: the paid amount must match the official order total.",
+              "The confirmation email is sent only once (duplicate protection)."
+            ]
+          }
+        },
+        "features": {
+          "label": "Features",
+          "title": "What the system does",
+          "items": [
+            { "title": "Mercado Pago checkout", "description": "Card, PSE and cash via Payment Brick; wallet preference for additional methods." },
+            { "title": "Plan catalog", "description": "Services with monthly, quarterly and yearly variants, read from the database." },
+            { "title": "AI voice test", "description": "Visitors record and receive a personalized verdict before buying." },
+            { "title": "Corporate quote", "description": "Multi-step form for companies and institutions requesting vocal training." },
+            { "title": "Webhooks & reconciliation", "description": "Signature verification, idempotency and amount validation against the order." },
+            { "title": "Transactional email", "description": "Purchase confirmation with service expectations via Resend." }
+          ]
+        },
+        "value": {
+          "label": "Business value",
+          "title": "Why it matters",
+          "items": [
+            "The client sells online with secure, automated payments instead of manual transfers.",
+            "Every student has an order with a clear status: approved, pending or rejected.",
+            "The payment flow is protected: server-side amounts, validated webhooks and duplicate-safe emails.",
+            "It is a real system in production: proof the work goes all the way to deployment and collection."
+          ]
+        },
+        "footer_note": "Code with client data sanitized. The system runs in production at lamagiadecantar.co."
+      }
+    }
   },
   "contact": {
     "badge": "contact",
