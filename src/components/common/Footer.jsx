@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Github, Linkedin, Plus } from 'lucide-react'
 
 const navigationLinks = [
@@ -53,6 +54,17 @@ export default function Footer() {
   const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
   const [email, setEmail] = useState('')
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  const goToSection = (e, hash) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/' + hash)
+    }
+  }
 
   useEffect(() => {
     setEmail('hello' + '@' + 'jesuspupo.dev')
@@ -100,9 +112,10 @@ export default function Footer() {
                 <li key={link.key}>
                   <a
                     href={link.href}
+                    onClick={(e) => goToSection(e, link.href)}
                     className="text-text-muted hover:text-brand-accent transition-colors duration-200"
                   >
-                    {t(`navbar.${link.key}`, link.key)}
+                    {t(`nav.${link.key}`, link.key)}
                   </a>
                 </li>
               ))}

@@ -4,6 +4,7 @@
 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, Download, ExternalLink } from 'lucide-react'
 import LanguageToggle from './LanguageToggle'
 
@@ -20,13 +21,35 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  const goToSection = (e, hash) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/' + hash)
+    }
+    setIsOpen(false)
+  }
+
+  const goToHome = (e) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      navigate('/')
+    }
+    setIsOpen(false)
+  }
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-sm bg-[#09090b]/80 border-b border-[#27272a]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* --- Brand --- */}
-          <a href="#" className="flex flex-col leading-tight">
+          <a href="/" onClick={goToHome} className="flex flex-col leading-tight">
             <span className="text-lg font-bold text-text-light tracking-tight">
               Jesus Pupo
             </span>
@@ -42,6 +65,7 @@ export default function Navbar() {
                 <a
                   key={link.key}
                   href={link.href}
+                  onClick={(e) => goToSection(e, link.href)}
                   className="px-3 py-2 text-sm font-medium text-text-muted
                     hover:text-text-light transition-colors rounded-lg
                     hover:bg-surface-border/50"
@@ -89,7 +113,7 @@ export default function Navbar() {
             <a
               key={link.key}
               href={link.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => goToSection(e, link.href)}
               className="block px-3 py-2 text-sm font-medium text-text-muted
                 hover:text-text-light transition-colors rounded-lg
                 hover:bg-surface-border/50"

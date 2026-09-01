@@ -24,7 +24,7 @@ export default function Hero() {
      ========================================================================== */
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 py-12 lg:py-20 overflow-hidden bg-[#09090b]">
+    <section id="about" className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 py-12 lg:py-20 overflow-hidden bg-[#09090b]">
 
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
