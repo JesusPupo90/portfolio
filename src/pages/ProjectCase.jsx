@@ -9,8 +9,10 @@ import { ArrowLeft, ArrowUpRight, ExternalLink, Plus, Check, Download } from 'lu
 import { IoLogoGithub } from 'react-icons/io5'
 import DiagramBlock from '../components/case/DiagramBlock'
 import Lightbox from '../components/case/Lightbox'
-import architectureChart from '../diagrams/paymentArchitecture.mmd?raw'
-import processChart from '../diagrams/paymentModule.mmd?raw'
+import architectureChartEs from '../diagrams/paymentArchitecture.mmd?raw'
+import architectureChartEn from '../diagrams/paymentArchitecture-en.mmd?raw'
+import processChartEs from '../diagrams/paymentModule.mmd?raw'
+import processChartEn from '../diagrams/paymentModule-en.mmd?raw'
 
 const STACK_CHIPS = [
   'Next.js',
@@ -24,9 +26,9 @@ const STACK_CHIPS = [
 ]
 
 const GALLERY_IMAGES = [
-  { src: '/projects/lamagiadecantar-home.webp', alt: 'Home' },
-  { src: '/projects/lamagiadecantar-checkout.webp', alt: 'Checkout' },
-  { src: '/projects/lamagiadecantar-voice.webp', alt: 'Prueba de voz con IA' },
+  { src: '/projects/lamagiadecantar-home.webp', altKey: 'home' },
+  { src: '/projects/lamagiadecantar-checkout.webp', altKey: 'checkout' },
+  { src: '/projects/lamagiadecantar-voice.webp', altKey: 'voice' },
 ]
 
 const K = 'projects.case.lamagiadecantar'
@@ -75,10 +77,18 @@ function Checklist({ items }) {
    ========================================================================== */
 
 export default function ProjectCase() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const c = (path) => t(`${K}.${path}`)
   const items = (path) => t(`${K}.${path}`, { returnObjects: true }) || []
   const [activeImage, setActiveImage] = useState(null)
+
+  const isEn = i18n.language === 'en'
+  const architectureChart = isEn ? architectureChartEn : architectureChartEs
+  const processChart = isEn ? processChartEn : processChartEs
+  const galleryItems = GALLERY_IMAGES.map((img) => ({
+    ...img,
+    alt: t(`projects.case.lamagiadecantar.gallery.${img.altKey}`),
+  }))
 
   const downloadLabel = t('projects.case.lamagiadecantar.diagrams.actions.download', 'Descargar')
 
@@ -179,9 +189,9 @@ export default function ProjectCase() {
       {/* ================= GALLERY ================= */}
       <section className="relative px-4 py-16 border-t border-surface-border/40">
         <div className="max-w-5xl mx-auto">
-          <SectionHeading label="Diseño" title="El frontend habla por sí solo" />
+          <SectionHeading label={c('gallery.label')} title={c('gallery.title')} />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {GALLERY_IMAGES.map((img) => (
+            {galleryItems.map((img) => (
               <div
                 key={img.src}
                 className="group relative aspect-[16/11] bg-surface-dark border border-surface-border/50 rounded-sm overflow-hidden cursor-zoom-in"

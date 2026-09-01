@@ -1,0 +1,82 @@
+%%{init: {"flowchart": {"defaultRenderer": "elk"}}}%%
+%% Payment module — La Magia de Cantar · Architecture view (systems)
+%% Each node: Line 1 = what it does (plain language) · Line 2 (italic) = table/field/function.
+%% Renderer Elk (fewer crossings). To preview: Ctrl+Shift+P → "Mermaid Preview: Preview Diagram".
+
+graph TD
+    subgraph CLIENTE["Client (browser / React)"]
+        A1["The user picks a service and a plan"<br/><i>NuestrosServicios.tsx · CTA</i>]
+        B1["Payment page with the data form"<br/><i>app/checkout/page.tsx → CheckoutForm.tsx</i>]
+        C1["Form with student and payer data"<br/><i>submitOrder&lpar;input, orderId&rpar;</i>]
+        D1["Payment Brick: tokenizes the card and delivers the formData (token)"<br/><i>MpBricks.tsx · payment-brick-container</i>]
+        D3["Redirects according to the payment status"<br/><i>onSubmit → /checkout/success · /checkout/failure</i>]
+        E1["Result page (read-only)"<br/><i>back_urls · /checkout/success · /checkout/failure</i>]
+    end
+
+    subgraph NEXT_SERVER["Next.js server (App Router / Server Actions)"]
+        A2["Reads the catalog from the database for the site"<br/><i>data/services.ts: getCatalog&lpar;&rpar;</i>]
+        B2["Validates service + plan from the URL"<br/><i>app/checkout/page.tsx</i>]
+        B3["404 if it does not exist or is quote-only"<br/><i>notFound&lpar;&rpar;</i>]
+        C2["Receives the form data"<br/><i>app/actions/ordenes.ts</i>]
+        C3["Validates zod + honeypot + plan↔service"<br/><i>lib/orders/create-order.ts</i>]
+        C4["Creates or reuses the order in 'draft'"<br/><i>orders · status 'draft'</i>]
+        C5["Creates the preference (only for the 'Mercado Pago' / wallet option)"<br/><i>POST /checkout/preferences</i>]
+        C6["Saves and sends the preference_id (enables the wallet)"<br/><i>orders.preference_id</i>]
+        D2["Charges with the token: creates the real payment in MP"<br/><i>lib/orders/process-payment.ts · POST /v1/payments</i>]
+        F1["Receives the payment notification from MP"<br/><i>POST /api/webhooks/mercadopago</i>]
+        F2["Validates signature + idempotency"<br/><i>x-signature HMAC · webhook_logs</i>]
+        F3["Checks the real payment status"<br/><i>GET /v1/payments/&lbrace;id&rbrace;</i>]
+        F4["Reconciles the paid amount"<br/><i>order_payments.amount vs orders.amount_total</i>]
+        F5["Updates status and records the payment"<br/><i>orders.status · order_payments</i>]
+        E2["Sends the payment confirmation email (welcome + expectations)"<br/><i>lib/orders/send-confirmation.ts · orders.confirmation_sent_at</i>]
+    end
+
+    subgraph MP["Mercado Pago (API)"]
+        MP1["Preferences API — creates the preference (wallet) and returns preference_id"<br/><i>POST /checkout/preferences</i>]
+        MP2["Payments API — creates the payment with the token and returns its status"<br/><i>POST /v1/payments · GET /v1/payments/&lbrace;id&rbrace;</i>]
+    end
+
+    subgraph RESEND["Resend (transactional email)"]
+        R1["Sends the confirmation to the buyer"<br/><i>sendPaymentConfirmation · no-reply@lamagiadecantar.co</i>]
+    end
+
+    subgraph SUPABASE["Database (Supabase)"]
+        A3[("Catalog: categories, services and plans with COP price — categories · services · service_variants")]
+        C7[("Orders: purchase intent with data, price and status — orders (service-role only)")]
+        F6[("Notification and payment log per order — webhook_logs · order_payments")]
+        G1[("Maintenance: expires drafts and pending; purges inactive orders — pg_cron (cron.sql)")]
+    end
+
+    A2 -->|"reads the catalog"| A1
+    B2 -->|"valid"| B1
+    B2 -->|"invalid / quote-only"| B3
+    B1 -->|"user fills in and submits"| C1
+    C1 --> C2
+    C2 --> C3
+    C3 --> C4
+    C4 -->|"INSERT / UPDATE"| C7
+    C4 --> C5
+    C5 --> MP1
+    MP1 -->|"returns preference_id"| C6
+    C5 -->|"saves preference_id"| C7
+    C6 -->|"preferenceId + amount"| D1
+    D1 -->|"delivers the token via onSubmit"| D2
+    D2 -->|"POST /v1/payments"| MP2
+    MP2 -.->|"returns payment status"| D2
+    D2 -->|"UPDATE status + order_payments"| C7
+    D2 -->|"payment approved → sends email"| E2
+    F5 -->|"transition to paid → sends email"| E2
+    E2 --> R1
+    D2 -->|"payment result"| D3
+    D3 -->|"redirects the browser"| E1
+    MP2 -.->|"webhook notification (all methods)"| F1
+    F1 --> F2
+    F2 --> F3
+    F3 --> MP2
+    MP2 -.->|"payment detail"| F4
+    F4 --> F5
+    F5 -->|"UPDATE status"| C7
+    F5 -->|"UPSERT payment"| F6
+    G1 --> C7
+    A2 -->|"SELECT (anon key)"| A3
+    B2 -->|"SELECT (anon key)"| A3

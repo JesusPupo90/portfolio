@@ -1,0 +1,50 @@
+%% Payment module — La Magia de Cantar · Process flow
+%% Each message = one step. Format: what is done (technical reference).
+%% Solid arrows = request · dashed arrows = response / async notification.
+%% To preview: Ctrl+Shift+P → "Mermaid Preview: Preview Diagram".
+
+sequenceDiagram
+    autonumber
+    actor U as User (browser)
+    participant UI as React (frontend)
+    participant S as Next.js server (App Router / Server Actions)
+    participant DB as Supabase (service-role for writes)
+    participant MP as Mercado Pago
+    participant R as Resend (email)
+
+    Note over UI,S: Picks service and plan — NuestrosServicios.tsx · CTA
+    U->>UI: Explores the catalog and clicks the button
+    UI->>S: GET /checkout?service=...&variant=...
+    S->>DB: SELECT catalog (anon key) — categories · services · service_variants
+    S->>UI: Renders the form — app/checkout/page.tsx → CheckoutForm.tsx
+    Note over UI,S: The form auto-saves to sessionStorage while typing
+    U->>UI: Fills in student and payer data (+ habeas data)
+    UI->>S: submitOrder(input, orderId) — app/actions/ordenes.ts
+    S->>S: Validates zod + honeypot + plan belongs to the service — lib/orders/create-order.ts
+    S->>DB: INSERT/UPDATE orders (status 'draft') — external_reference = orders.id
+    S->>MP: POST /checkout/preferences — creates the preference (only for the "Mercado Pago"/wallet option)
+    MP-->>S: Returns preference_id (the wallet option key)
+    S->>DB: Saves the preference_id in orders
+    S-->>UI: preferenceId + amount (to mount the brick)
+    UI->>MP: Mounts the Payment Brick (initialization.preferenceId + amount) — MpBricks.tsx
+    U->>UI: Chooses method (card / PSE / cash) and fills in the data
+    UI->>MP: The brick tokenizes the card and delivers the formData (token) to onSubmit
+    UI->>S: onSubmit → processPayment(orderId, formData) — app/actions/payments.ts
+    S->>S: Extracts the token and validates the order (amount NEVER from the client) — lib/orders/process-payment.ts
+    S->>MP: POST /v1/payments — token + official transaction_amount + notification_url
+    MP-->>S: Returns the payment (id, status: approved / pending / rejected)
+    S->>DB: UPDATE orders status + order_payments (never reverts from 'paid')
+    S->>R: Sends payment confirmation (welcome + expectations) — lib/orders/send-confirmation.ts
+    R-->>U: Email to the buyer (no-reply@lamagiadecantar.co)
+    Note over S,R: Duplicate protection — orders.confirmation_sent_at (also triggered from the webhook when confirming pending payments)
+    S-->>UI: payment status
+    UI-->>U: approved/pending → /checkout/success · rejected → inline error (read-only)
+    Note over UI,MP: "Mercado Pago" option (wallet): the brick opens the MP checkout in a new tab with the preference (back_urls)
+    Note over MP,S: Async webhook notification (all methods)
+    MP->>S: POST /api/webhooks/mercadopago (x-signature) — payment notification
+    S->>S: Verifies HMAC signature + idempotency — webhook_logs
+    S->>MP: GET /v1/payments/{id} — real payment status
+    MP-->>S: Detail (transaction_amount, status)
+    S->>S: Anti-fraud reconciliation: amount == orders.amount_total
+    S->>DB: UPDATE orders (re-confirms, idempotent) + order_payments
+    Note over DB,MP: pg_cron — expires drafts and pending payments (30 min) · purges inactive orders (>48 h) — cron.sql

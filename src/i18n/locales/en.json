@@ -84,6 +84,13 @@
         "cta_demo": "View live site",
         "cta_code": "View code on GitHub",
         "back": "Back to projects",
+        "gallery": {
+          "label": "Design",
+          "title": "The frontend speaks for itself",
+          "home": "Home",
+          "checkout": "Checkout",
+          "voice": "AI voice test"
+        },
         "overview": {
           "label": "Overview",
           "title": "A live system, not a demo",
@@ -117,7 +124,8 @@
             "zoom": "Expand",
             "png": "Download PNG",
             "svg": "Download SVG",
-            "download": "Download"
+            "download": "Download",
+            "loading": "Loading diagram…"
           },
           "architecture": {
             "label": "Architecture",

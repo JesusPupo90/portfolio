@@ -2,7 +2,7 @@
    DIAGRAM BLOCK (mermaid + ampliar + descargar PNG/SVG)
    ========================================================================== */
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Maximize2, FileImage, FileCode } from 'lucide-react'
 import MermaidDiagram from './MermaidDiagram'
@@ -52,6 +52,11 @@ export default function DiagramBlock({ chart, fileName, label }) {
   const [open, setOpen] = useState(false)
   const exportSvgRef = useRef(null)
   const exportPromiseRef = useRef(null)
+
+  useEffect(() => {
+    exportSvgRef.current = null
+    exportPromiseRef.current = null
+  }, [chart])
 
   const btn = (k) => t(`${K}.${k}`)
 
@@ -145,7 +150,7 @@ export default function DiagramBlock({ chart, fileName, label }) {
           {svg ? (
             <div className="mermaid-svg" dangerouslySetInnerHTML={{ __html: svg }} />
           ) : (
-            <div className="py-16 text-xs font-mono text-text-muted/50">Cargando diagrama…</div>
+            <div className="py-16 text-xs font-mono text-text-muted/50">{btn('loading')}</div>
           )}
         </div>
       </Lightbox>

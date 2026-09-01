@@ -3,9 +3,11 @@
    ========================================================================== */
 
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { buildMermaidConfig, cleanChart } from './mermaidConfig'
 
 export default function MermaidDiagram({ chart, onRendered, className }) {
+  const { t } = useTranslation()
   const [svg, setSvg] = useState('')
   const [error, setError] = useState(null)
   const renderId = useRef('mmd-' + Math.random().toString(36).slice(2))
@@ -54,7 +56,7 @@ export default function MermaidDiagram({ chart, onRendered, className }) {
         />
       ) : (
         <div className="py-16 text-center text-xs font-mono text-text-muted/50 animate-pulse">
-          Cargando diagrama…
+          {t('projects.case.lamagiadecantar.diagrams.actions.loading', 'Cargando diagrama…')}
         </div>
       )}
     </div>
